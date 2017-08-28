@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  root to: 'users#show'
+  get 'friendships/create'
+
+  get 'friendships/destroy'
+
+  root to: 'users#index'
   
   devise_for :users
   resources :users

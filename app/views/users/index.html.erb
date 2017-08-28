@@ -1,1 +1,8 @@
-Hello
+<h1>User List</h1>
+
+<% @users.each do |user| %>
+  <p>
+    <strong><%= user.name %></strong>
+    <%= link_to "Add Friend", friendships_create_path(friend_id: user) %>
+  </p>
+<% end %>

@@ -9,8 +9,20 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %> alert-dismissible">
+        <%# <button type='button' class='close fade' data-dismiss='alert'>
+          <span aria-hidden="true">&times;</span>
+        </button> %>
+        <%= message %>
+      </div>
+    <% end %>
+    
     <%= yield %>
+
+    <%= link_to "Index", users_path %>
+    <% if current_user %>
+      <%= link_to "Profile", user_path(current_user) %>
+    <% end %>
   </body>
 </html>

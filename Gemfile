@@ -19,6 +19,7 @@ group :development, :test do
   gem 'pg', '~> 0.21'
   gem 'rspec-rails', '~> 3.6'
   gem 'factory_girl_rails', '~> 4.8'
+  gem 'faker', '~> 1.8'
 end
 
 group :development do
@@ -29,7 +30,6 @@ group :development do
 end
 
 group :test do
-  gem 'faker', '~> 1.8'
   gem 'guard-rspec', '~> 4.7'
   gem 'launchy', '~> 2.4'
 end

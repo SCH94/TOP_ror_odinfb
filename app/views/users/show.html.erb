@@ -1,3 +1,17 @@
-<%= current_user.email %>
+<h1>Your Profile</h1>
+
+<%= @user.email %>
+<p>
+  <h2>Your friends</h2>
+</p>
+
+<p>
+  <% @friendships.each do |friendship|%>
+    <p>
+      <%= friendship.friend.name %>
+      <%= link_to "Remove friend", friendships_destroy_path(id: friendship) %>
+    </p>
+  <% end %>
+</p>
 
 <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
