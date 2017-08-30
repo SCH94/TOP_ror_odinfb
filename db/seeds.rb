@@ -13,3 +13,7 @@
     password: 'Password#{n}'
   )
 end
+
+5.times do |n|
+  User.first.friendships.create(friend_id: n)
+end
