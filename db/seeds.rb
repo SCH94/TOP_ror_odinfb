@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-10.times do |n|
+5.times do |n|
   User.create(
     name: Faker::HarryPotter.character,
     email: Faker::Internet.email,
@@ -14,6 +14,6 @@
   )
 end
 
-5.times do |n|
-  User.first.friendships.create(friend_id: n)
+2.times do |n|
+  User.first.friendships.create(friend_id: n + 2)
 end

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def index
     if user_signed_in?
-      @users = User.all
+      @users = User.all_except(current_user)
     else
       flash[:error] = 'You must sign in or sign up to continue'
       redirect_to new_user_session_path
@@ -11,7 +11,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
+    @user = User.find(params[:id])
     @friendships = @user.friendships
+    @inverse_friendships = @user.inverse_friendships
   end
 end

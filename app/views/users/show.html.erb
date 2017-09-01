@@ -1,8 +1,9 @@
-<h1>Your Profile</h1>
-
+<h1>Profile</h1>
+<%= @user.name %>
 <%= @user.email %>
+
 <p>
-  <h2>Your friends</h2>
+  <h2>Friends</h2>
 </p>
 
 <p>
@@ -10,6 +11,18 @@
     <p>
       <%= friendship.friend.name %>
       <%= link_to "Remove friend", friendships_destroy_path(id: friendship) %>
+    </p>
+  <% end %>
+</p>
+
+<p>
+  <h2>Friended by Users</h2>
+</p>
+
+<p>
+  <% @inverse_friendships.each do |friendship|%>
+    <p>
+      <%= friendship.user.name %>
     </p>
   <% end %>
 </p>
