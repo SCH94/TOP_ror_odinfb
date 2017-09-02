@@ -12,7 +12,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @friendships = @user.friendships
-    @inverse_friendships = @user.inverse_friendships
+    @friendships = @user.friendships.where(accepted: true)
+    @received_friendships = @user.received_friendships.where(accepted: true)
+    @pending_friendships = @user.received_friendships.where(accepted: false)
   end
 end

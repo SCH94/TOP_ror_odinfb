@@ -3,6 +3,10 @@
 <% @users.each do |user| %>
   <p>
     <strong><%= user.name %></strong>
-    <%= link_to "Add Friend", friendships_create_path(friend_id: user) %>
+    <% if current_user.friends.include?(user)%>
+      <%= "Already friended" %>
+    <% else %>
+      <%= link_to "Request Friend", friendships_path(friend_id: user), method: :post %>
+    <% end %>
   </p>
 <% end %>

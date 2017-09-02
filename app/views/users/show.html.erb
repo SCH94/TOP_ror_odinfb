@@ -3,28 +3,40 @@
 <%= @user.email %>
 
 <p>
-  <h2>Friends</h2>
+  <h2>Friends List</h2>
 </p>
 
 <p>
-  <% @friendships.each do |friendship|%>
+  <!-- current_user referenced by user_id -->
+  <% @friendships.each do |friendship| %>
     <p>
-      <%= friendship.friend.name %>
-      <%= link_to "Remove friend", friendships_destroy_path(id: friendship) %>
+      <%= friendship.inspect %>
+      <%= find_user(friendship.friend_id).name %>
+      <%= link_to "Remove friend", friendship_path(friendship), method: :delete %>
+    </p>
+  <% end %>
+  <!-- current_user referenced by friend_id -->
+  <% @received_friendships.each do |friendship| %>
+      <p>
+      <%= friendship.inspect %>
+      <%= find_user(friendship.user_id).name %>
+      <%= link_to "Remove friend", friendship_path(friendship), method: :delete %>
     </p>
   <% end %>
 </p>
 
 <p>
-  <h2>Friended by Users</h2>
+  <h2>Requests by Users</h2>
 </p>
 
 <p>
-  <% @inverse_friendships.each do |friendship|%>
+  <% @pending_friendships.each do |request|%>
     <p>
-      <%= friendship.user.name %>
+      <%= request.inspect %>
+      <%= find_user(request.user_id).name %>
+      <%= link_to "Accept", friendship_path(request), method: "put" %>
     </p>
   <% end %>
 </p>
 
-<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+<% console %>
