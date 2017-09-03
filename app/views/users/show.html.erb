@@ -7,19 +7,9 @@
 </p>
 
 <p>
-  <!-- current_user referenced by user_id -->
   <% @friendships.each do |friendship| %>
     <p>
-      <%= friendship.inspect %>
-      <%= find_user(friendship.friend_id).name %>
-      <%= link_to "Remove friend", friendship_path(friendship), method: :delete %>
-    </p>
-  <% end %>
-  <!-- current_user referenced by friend_id -->
-  <% @received_friendships.each do |friendship| %>
-      <p>
-      <%= friendship.inspect %>
-      <%= find_user(friendship.user_id).name %>
+      <%= find_user(friendship.return_friend_id(@user.id)).name %>
       <%= link_to "Remove friend", friendship_path(friendship), method: :delete %>
     </p>
   <% end %>

@@ -10,16 +10,16 @@
   User.create(
     name: Faker::HarryPotter.character,
     email: "Example#{n}@gmail.com",
-    password: "test#{n}"
+    password: "testing#{n}"
   )
 end
 
 User.create(
   name: "Leonard Soai-Van",
   email: "leo@gmail.com",
-  password: "test"
+  password: "testing"
 )
 
 user = User.find_by(email: "leo@gmail.com")
 user.friendships.create(friend_id: 4, accepted: true)
-user.received_friendships.create(user_id: 1, accepted: true)
+user.received_friendships.create(friend_id: user.id, user_id: 1, accepted: true)
