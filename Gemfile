@@ -5,14 +5,15 @@ ruby '2.4.1'
 gem 'rails', '~> 5.1.2'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
+gem 'autoprefixer-rails', '~> 7.1'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'figaro', '~> 1.1'
 gem 'devise', '~> 4.3'
 gem 'bootstrap-sass', '~> 3.3'
-gem 'autoprefixer-rails', '~> 7.1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

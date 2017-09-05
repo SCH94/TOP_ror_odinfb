@@ -22,11 +22,8 @@
 <p>
   <% @pending_friendships.each do |request|%>
     <p>
-      <%= request.inspect %>
       <%= find_user(request.user_id).name %>
       <%= link_to "Accept", friendship_path(request), method: "put" %>
     </p>
   <% end %>
 </p>
-
-<% console %>

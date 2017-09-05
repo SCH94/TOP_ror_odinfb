@@ -52,3 +52,4 @@ N/A
 
 ## Acknowledgments
 * The Odin Project
+* [RailsCasts #163: Self-Referential Association](http://railscasts.com/episodes/163-self-referential-association)
