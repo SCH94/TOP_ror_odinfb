@@ -19,9 +19,11 @@
           <a href='#'>
             <span class='glyphicon glyphicon-envelope'></span>
             <span>REQUESTS</span>
-            <span class='badge'>
-              <%= current_user.requested_friendships.count %>
-            </span>
+            <% if user_signed_in? %>
+              <span class='badge'>
+                <%= current_user.requested_friendships.count %>
+              </span>
+            <% end %>
           </a>
         </li>
       </ul>
