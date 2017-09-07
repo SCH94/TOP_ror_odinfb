@@ -29,5 +29,17 @@
 </p>
 
 <p>
+  <h2>Posts</h2>
+</p>
+<p>
   <%= link_to 'Create post', new_post_path %>
+</p>
+<p>
+  <% @posts.each do |post| %>
+    <div id='post'>
+      <p><%= post.title %><p/>
+      <p><%= post.body %></p>    
+    </div>
+  <% end %>
+<p>
 </p>

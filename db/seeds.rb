@@ -22,4 +22,11 @@ User.create(
 
 user = User.find_by(email: "leo@gmail.com")
 user.friendships.create(friend_id: 4, accepted: true)
-user.received_friendships.create(friend_id: user.id, user_id: 1, accepted: true)
+# user.received_friendships.create(friend_id: user.id, user_id: 1, accepted: true)
+
+5.times do |n|
+  user.posts.create(
+    title: Faker::Book.title, 
+    body: Faker::VentureBros.quote  
+  )
+end
