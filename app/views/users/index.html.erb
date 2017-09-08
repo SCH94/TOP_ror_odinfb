@@ -2,7 +2,8 @@
 
 <% @users.each do |user| %>
   <p>
-    <strong><%= user.name %></strong>
+    <strong>
+      <%= link_to "#{user.name}", user_path(user) %></strong>
     <% if current_user.friends.include?(user)%>
       <%= "Already friended" %>
     <% else %>

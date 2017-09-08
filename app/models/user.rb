@@ -8,7 +8,8 @@ class User < ApplicationRecord
   has_many :pending_friends, -> { where(friendships: { accepted: false}) }, through: :friendships, source: :friend
   has_many :requested_friendships, -> { where(friendships: { accepted: false}) }, through: :received_friendships, source: :user
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -23,5 +24,17 @@ class User < ApplicationRecord
 
   def all_friendships
     self.friendships.where(accepted: true, user_id: self.id).or(self.received_friendships.where(accepted: true, friend_id: self.id))
+  end
+
+  def like!(post)
+    self.likes.create!(post_id: post.id)
+  end
+
+  def unlike!(post)
+    heart = self.likes.find_by_post_id(post.id)
+  end
+
+  def like?(post)
+    self.likes.find_by_post_id(post.id)
   end
 end
