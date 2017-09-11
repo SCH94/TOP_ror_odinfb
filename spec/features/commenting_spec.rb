@@ -6,11 +6,8 @@ describe 'Comment management', type: :feature do
   let!(:post) { poster.posts.create(title: "Title", body: "Body of post") }
   let!(:commenter) { create(:user) }
 
-  scenario 'liking a post' do
-    visit root_path
-    fill_in 'Email', with: commenter.email
-    fill_in 'Password', with: commenter.password
-    click_button 'Log in'
+  scenario 'commenting on a post' do
+    log_in(commenter)
 
     visit user_path(poster)
 

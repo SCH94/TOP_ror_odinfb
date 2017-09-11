@@ -7,10 +7,7 @@ describe 'Like management', type: :feature do
   let!(:liker) { create(:user) }
 
   scenario 'liking a post' do
-    visit root_path
-    fill_in 'Email', with: liker.email
-    fill_in 'Password', with: liker.password
-    click_button 'Log in'
+    log_in(liker)
 
     visit user_path(poster)
 
@@ -21,10 +18,7 @@ describe 'Like management', type: :feature do
   scenario 'unliking a post' do
     liker.likes.create!(post_id: post.id)
 
-    visit root_path
-    fill_in 'Email', with: liker.email
-    fill_in 'Password', with: liker.password
-    click_button 'Log in'
+    log_in(liker)
 
     visit user_path(poster)
 
