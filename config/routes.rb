@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :comments
-  resources :likes
+  # resources :likes
   root to: 'users#index'
   
   devise_for :users
@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :friendships, only: [:create, :update, :destroy]
   resources :posts do
     resources :likes, only: [:create, :destroy]
+    resources :comments
   end
 end

@@ -38,4 +38,8 @@ class User < ApplicationRecord
   def like?(post)
     self.likes.find_by_post_id(post.id)
   end
+
+  def comment_on(post)
+    self.comments.create!(post_id: post.id)
+  end
 end

@@ -45,10 +45,11 @@
       <%= render partial: "likes/button", locals: { post: post } %>
       <p>Comments:<p>
       <ul>
-        <% post.comments.each do |comment| %>
+        <% post.comments.reverse_order.each do |comment| %>
           <li><%= comment.body %> Posted <%= time_ago_in_words(comment.created_at) %></li>
         <% end %>
       </ul>
+      <%= link_to 'Write a comment', new_post_comment_path(post) %>
     </div>
   <% end %>
 </p>
