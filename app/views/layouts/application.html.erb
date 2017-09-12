@@ -6,6 +6,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Encode+Sans|Open+Sans+Condensed:300" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
@@ -15,23 +16,13 @@
     <% end %>
 
     <div class='container'>
-      <div class='row'>
-        <div class='col-xs-12'>
-          <%= render 'shared/flash' %>
-        </div>
-      </div>
-      <div class='row'>
-        <div class='col-xs-10 col-xs-offset-1'>
-          <%= yield %>
-          <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-          <%= link_to "Index", users_path %>
-          <% if current_user %>
-            <%= link_to "Profile", user_path(current_user) %>
-          <% end %>
-        </div>
-      </div>
-
+      <%= render 'shared/flash' %>
+      <%= yield %>
+      <% if current_user %>
+        <%= link_to "Profile", user_path(current_user) %>
+        <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+        <%= link_to "Index", users_path %>
+      <% end %>
     </div>
-    <% console %>
   </body>
 </html>
