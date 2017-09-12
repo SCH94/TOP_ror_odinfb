@@ -11,12 +11,16 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <%= render 'shared/navbar' %>
-    <% end %>
+    <div id='navbar'>
+      <% if user_signed_in? %>
+        <%= render 'shared/navbar' %>
+      <% end %>
+    </div>
 
     <div class='container'>
-      <%= render 'shared/flash' %>
+      <div id='flash'>
+        <%= render 'shared/flash' %>
+      </div>
       <%= yield %>
       <% if current_user %>
         <%= link_to "Profile", user_path(current_user) %>
