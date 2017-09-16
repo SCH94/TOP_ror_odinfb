@@ -11,9 +11,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li>
-        <%= link_to current_user do %>
-          <span class='glyphicon glyphicon-user'></span>  PROFILE
-        <% end %>
+          <%= link_to current_user do %>
+            <span class='glyphicon glyphicon-user'></span>
+            <span>PROFILE<span>
+          <% end %>
         </li>
         <li>
           <a href='#'>
@@ -25,6 +26,12 @@
               </span>
             <% end %>
           </a>
+        </li>
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <span class='glyphicon glyphicon-log-out'></span>
+            <span>LOG OUT</span>
+          <% end %>
         </li>
       </ul>
     </div>

@@ -1,6 +1,9 @@
-<h1>Profile</h1>
-<%= @user.name %>
-<%= @user.email %>
+<div class='row'>
+  <div class='col-xs-10 col-xs-offset-1'>
+    <h1>Your Profile</h1>
+    <h4><%= @user.name %></h4>
+  </div>
+</div>
 
 <p>
   <h2>Friends List</h2>
@@ -42,7 +45,7 @@
       <p><%= post.title %><p/>
       <p><%= post.body %></p>
       <%= post.likes.count %>
-      <%= render partial: "likes/button", locals: { post: post } %>
+      <%= render partial: "likes/link", locals: { post: post } %>
       <p>Comments:<p>
       <ul>
         <% post.comments.reverse_order.each do |comment| %>

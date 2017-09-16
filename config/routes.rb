@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
   resources :comments
-  # resources :likes
-  root to: 'users#index'
   
   devise_for :users
+
+  devise_scope :user do
+    authenticated :user do
+      root :to => 'posts#index', as: :authenticated_root
+    end
+    unauthenticated do
+      root :to => 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
   
   resources :users
   resources :friendships, only: [:create, :update, :destroy]

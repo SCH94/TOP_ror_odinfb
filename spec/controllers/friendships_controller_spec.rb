@@ -30,7 +30,7 @@ describe FriendshipsController do
       it 'redirects to root' do
         sign_in user
         get :create, params: { friends_id: nil }
-        expect(response).to redirect_to root_url
+        expect(response).to redirect_to users_path
       end
 
 

@@ -14,19 +14,26 @@
   )
 end
 
-User.create(
+user = User.create(
   name: "Leonard Soai-Van",
   email: "leo@gmail.com",
   password: "testing"
 )
 
-user = User.find_by(email: "leo@gmail.com")
 user.friendships.create(friend_id: 4, accepted: true)
+friend = User.find(4)
 
 5.times do |n|
   user.posts.create(
     title: Faker::Book.title, 
     body: Faker::VentureBros.quote  
+  )
+end
+
+3.times do |n|
+  friend.posts.create(
+    title: Faker::Book.title,
+    body: Faker::VentureBros.quote         
   )
 end
 

@@ -1,0 +1,11 @@
+<% if current_user.like?(post) %>
+  <%= link_to post_like_path(post_id: post.id, id: post.likes), method: :delete do %>
+    <i class='glyphicon glyphicon-heart'></i><br>
+    <span>Unlike</span>
+  <% end %>
+<% else %>
+  <%= link_to post_likes_path(post_id: post.id), method: :post do %>
+    <i class='glyphicon glyphicon-heart'></i><br>
+    <span>Like</span>
+  <% end %>
+<% end %>

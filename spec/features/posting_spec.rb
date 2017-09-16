@@ -4,10 +4,7 @@ describe 'Post management', type: :feature do
   scenario 'creating a new post' do
     user = create(:user)
 
-    visit root_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_button 'Log in'
+    log_in(user)
 
     visit user_path(user)
     click_link 'Create post'

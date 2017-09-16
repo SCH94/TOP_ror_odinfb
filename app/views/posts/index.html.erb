@@ -1,25 +1,48 @@
-<p id="notice"><%= notice %></p>
+<div class='row'>
+  <div class='col-xs-10 col-xs-offset-1'>
+    <h1>The Feed</h1>
+    <h4>Here's the shit people are saying about you</h4>
+  </div>
+</div>
 
-<h1>Posts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div id='feed-posts' class='row'>
+  <div class='col-xs-12'>
     <% @posts.each do |post| %>
-      <tr>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class='post-box'>
+        <div class='post-text'>
+
+          <div class='post-author'>
+            <%= User.find(post.user_id).name %> said...
+          </div>
+          <div class='post-body'>
+            <%= post.body %>
+          </div>
+          <div class='post-reactions'>
+            <div class='likes'>
+              <%= post.likes.count %> Likes
+            </div>
+            <div class='comments'>
+              <%= post.comments.count %> Comments
+            </div>              
+          </div>
+        </div>
+
+        <div
+          class='row post-links'>
+          <div class='col-xs-4'>
+            <%= render partial: "likes/link", locals: { post: post } %>
+          </div>
+          <div class='col-xs-4'>
+            <%= render partial: "comments/link", locals: { post: post } %>
+          </div>
+          <div class='col-xs-4'>
+            <%= link_to url:"###" do %>
+              <i class='glyphicon glyphicon-share'></i><br>
+              <span>Share</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+  </div>
+</div>

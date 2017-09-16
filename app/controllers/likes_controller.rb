@@ -3,7 +3,7 @@ class LikesController < ApplicationController
     @user = current_user
     @post = Post.find(params[:post_id])
     @user.like!(@post)
-    redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: user_path(@post.user_id))
   end
 
   def destroy
@@ -11,6 +11,6 @@ class LikesController < ApplicationController
     @like = @user.likes.find_by_post_id(params[:post_id])
     @post = Post.find(params[:post_id])
     @like.destroy!
-    redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: user_path(@post.user_id))
   end
 end

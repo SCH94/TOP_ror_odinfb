@@ -9,9 +9,9 @@ class CommentsController < ApplicationController
     @poster = User.find(@post.user_id)
 
     if @comment.save
-      redirect_to user_path(@poster)
+      redirect_to posts_path
     else
-      flash.now[:danger] = "There was a mistake"
+      flash.now[:error] = "There was a mistake"
       render :new
     end
   end

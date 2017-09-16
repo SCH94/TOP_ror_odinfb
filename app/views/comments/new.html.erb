@@ -1,12 +1,27 @@
-<h1>Write your comment</h1>
-
-<%= form_with model: @comment, url: post_comments_path do |f| %>
-  <div>
-    <%= f.label :body, 'Comment' %>
-    <%= f.text_area :body, id: 'Comment', autofocus: true %>
+<div class='row'>
+  <div class='col-xs-10 col-xs-offset-1'>
+    <h1>Write your comment</h1>
+    <h4>Take a moment to clapback at the fools</h4>
   </div>
+</div>
 
-  <div>
-    <%= f.submit 'Submit' %>
+<div id='comment-box' class='row'>
+  <div class='col-xs-10 col-xs-offset-1'>
+    <%= form_with model: @comment, url: post_comments_path do |f| %>
+      <div>
+        <% f.label :body, 'Comment' %>
+        <%= f.text_area :body, 
+          id: 'Comment',
+          autofocus: true,
+          class: 'form-control' %>
+      </div>
+
+      <div id='comment-submit' class='col-xs-8 col-xs-offset-2'>
+        <%= f.submit 'Submit', class: 'btn btn-primary form-control' %>
+      </div>
+      <div id='comment-cancel' class='col-xs-8 col-xs-offset-2'>
+        <%= link_to 'Cancel', posts_path, class: 'btn btn-warning form-control' %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

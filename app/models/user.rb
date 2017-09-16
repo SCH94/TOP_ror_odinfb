@@ -42,4 +42,8 @@ class User < ApplicationRecord
   def comment_on(post)
     self.comments.create!(post_id: post.id)
   end
+
+  def feed
+    Post.where("user_id IN (?) OR user_id = ?", active_friend_ids, id).order(created_at: :desc)
+  end
 end
