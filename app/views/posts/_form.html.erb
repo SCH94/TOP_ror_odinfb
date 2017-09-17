@@ -11,15 +11,29 @@
     </div>
   <% end %>
 
-  <p>
-    <%= form.label :title, 'Title' %>
-    <%= form.text_field :title, id: 'Title' %>
-  </p>
-  <p>
-    <%= form.label :body, 'Body' %>
-    <%= form.text_area :body, id: 'Post' %>
-  </p>
+  <div>
+    <% form.label :title, 'Title' %>
+    <%= form.text_field :title, 
+      id: 'Title',
+      autofocus: true,
+      placeholder: 'Title (optional)',
+      class: 'form-control' %>
+  </div>
+
+  <div id='post-body'>
+    <% form.label :body, 'Body' %>
+    <%= form.text_area :body, 
+      id: 'Post',
+      placeholder: 'Body',
+      class: 'form-control' %>
+  </div>
+  
   <div class="actions">
-    <%= form.submit %>
+    <div id='post-submit' class='col-xs-8 col-xs-offset-2'>
+      <%= form.submit 'Submit', class: 'btn btn-primary form-control' %>
+    </div>
+    <div id='post-cancel' class='col-xs-8 col-xs-offset-2'>
+      <%= link_to 'Cancel', posts_path, class: 'btn btn-warning form-control' %>
+    </div>
   </div>
 <% end %>

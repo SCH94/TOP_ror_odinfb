@@ -1,20 +1,38 @@
 require 'rails_helper'
 
 describe 'Post management', type: :feature do
-  scenario 'creating a new post' do
-    user = create(:user)
+  before :example do
+    @user = create(:user)
+    log_in(@user)
+  end
 
-    log_in(user)
+  context 'creating a new post' do
+    scenario 'from the feed' do
+      visit authenticated_root_path
 
-    visit user_path(user)
-    click_link 'Create post'
+      click_link 'Create post'
 
-    expect{
-      fill_in 'Title', with: 'A new post'
-      fill_in 'Post', with: 'This is a brief, test post.'
-      click_button 'Create Post'                  
-    }.to change(Post, :count).by 1
-    expect(current_path).to eq user_path(user)
-    expect(page).to have_content "Post was successfully created"
+      expect{
+        fill_in 'Title', with: 'A new post'
+        fill_in 'Post', with: 'This is a brief, test post.'
+        click_button 'Submit'                        
+      }.to change(Post, :count).by 1
+      expect(current_path).to eq authenticated_root_path
+      expect(page).to have_content 'Post was successfully created'
+    end
+
+    scenario 'from profile' do
+      visit user_path(@user)
+
+      click_link 'Create post'
+
+      expect{
+        fill_in 'Title', with: 'A new post'
+        fill_in 'Post', with: 'This is a brief, test post.'
+        click_button 'Submit'                        
+      }.to change(Post, :count).by 1
+      expect(current_path).to eq user_path(@user)
+      expect(page).to have_content 'Post was successfully created'
+    end
   end
 end

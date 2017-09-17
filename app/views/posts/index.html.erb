@@ -5,7 +5,13 @@
   </div>
 </div>
 
+
 <div id='feed-posts' class='row'>
+  <div class='row'>
+    <div class='col-xs-6 col-xs-offset-3'>
+      <%= link_to 'Create post', new_post_path, class: 'btn btn-primary form-control' %>
+    </div>
+  </div>
   <div class='col-xs-12'>
     <%= render partial: 'posts/feed' %>
   </div>

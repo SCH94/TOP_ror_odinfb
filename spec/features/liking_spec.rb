@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'Like management', type: :feature do
-
   before :example do
     @poster = create(:user)
     @liker = create(:user)
