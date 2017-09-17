@@ -2,27 +2,48 @@ require 'rails_helper'
 
 describe 'Like management', type: :feature do
 
-  let!(:poster) { create(:user) }
-  let!(:post) { poster.posts.create(title: "Title", body: "Body of post") }
-  let!(:liker) { create(:user) }
+  before :example do
+    @poster = create(:user)
+    @liker = create(:user)
+    @post = @poster.posts.create(title: "Title", body: "Body of post")
+    create(:friendship, user_id: @liker.id, friend_id: @poster.id, accepted: true)
 
-  scenario 'liking a post' do
-    log_in(liker)
-
-    visit user_path(poster)
-
-    expect{ click_button 'Like' }.to change(Like, :count).by 1
-    expect(current_path).to eq user_path(poster)
+    log_in(@liker)
   end
 
-  scenario 'unliking a post' do
-    liker.likes.create!(post_id: post.id)
+  context 'liking a post' do
+    scenario 'on the feed' do
+      visit authenticated_root_path
 
-    log_in(liker)
+      expect{ click_link 'Like' }.to change(@post.likes, :count).by 1
+      expect(current_path).to eq authenticated_root_path
+    end
 
-    visit user_path(poster)
+    scenario 'on a profile' do
+      visit user_path(@poster)
 
-    expect{ click_button 'Unlike' }.to change(post.likes, :count).by -1
-    expect(current_path).to eq user_path(poster)
+      expect{ click_link 'Like' }.to change(@post.likes, :count).by 1
+      expect(current_path).to eq user_path(@poster)
+    end
+  end
+
+  context 'unliking a post' do
+    before :each do
+      @liker.likes.create!(post_id: @post.id)
+    end
+
+    scenario 'on the feed' do
+      visit authenticated_root_path
+      
+      expect{ click_link 'Unlike' }.to change(@post.likes, :count).by -1
+      expect(current_path).to eq authenticated_root_path
+    end
+
+    scenario 'on a profile' do
+      visit user_path(@poster)
+      
+      expect{ click_link 'Unlike' }.to change(@post.likes, :count).by -1
+      expect(current_path).to eq user_path(@poster)
+    end
   end
 end
