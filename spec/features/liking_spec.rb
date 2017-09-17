@@ -10,37 +10,31 @@ describe 'Like management', type: :feature do
     log_in(@liker)
   end
 
-  context 'liking a post' do
-    scenario 'on the feed' do
+  context 'from the feed' do
+    scenario 'liking a post' do
       visit authenticated_root_path
-
       expect{ click_link 'Like' }.to change(@post.likes, :count).by 1
       expect(current_path).to eq authenticated_root_path
     end
 
-    scenario 'on a profile' do
-      visit user_path(@poster)
-
-      expect{ click_link 'Like' }.to change(@post.likes, :count).by 1
-      expect(current_path).to eq user_path(@poster)
-    end
-  end
-
-  context 'unliking a post' do
-    before :each do
+    scenario 'unliking a post' do
       @liker.likes.create!(post_id: @post.id)
-    end
-
-    scenario 'on the feed' do
       visit authenticated_root_path
-      
       expect{ click_link 'Unlike' }.to change(@post.likes, :count).by -1
       expect(current_path).to eq authenticated_root_path
     end
+  end
 
-    scenario 'on a profile' do
+  context 'from a profile' do
+    scenario 'liking a post' do
       visit user_path(@poster)
-      
+      expect{ click_link 'Like' }.to change(@post.likes, :count).by 1
+      expect(current_path).to eq user_path(@poster)
+    end
+
+    scenario 'unliking a post' do
+      @liker.likes.create!(post_id: @post.id)
+      visit user_path(@poster)
       expect{ click_link 'Unlike' }.to change(@post.likes, :count).by -1
       expect(current_path).to eq user_path(@poster)
     end
