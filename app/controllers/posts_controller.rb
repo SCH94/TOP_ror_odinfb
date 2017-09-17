@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = current_user.feed
+    session[:return_to] = request.fullpath
   end
   
   def show

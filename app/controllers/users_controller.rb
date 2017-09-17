@@ -15,5 +15,6 @@ class UsersController < ApplicationController
     @friendships = @user.all_friendships
     @pending_friendships = @user.received_friendships.where(accepted: false)
     @posts = @user.posts
+    session[:return_to] = request.fullpath
   end
 end

@@ -15,13 +15,14 @@ describe 'Comment management', type: :feature do
     click_link('Comment')
     fill_in 'Comment', with: Faker::VentureBros.quote
     expect{ click_button 'Submit' }.to change(Comment, :count).by 1
-    expect(current_path).to eq posts_path
+    expect(current_path).to eq(authenticated_root_path)
   end
 
   scenario 'commenting on a profile post' do
     log_in(commenter)
 
     visit user_path(poster)
+    
     click_link('Comment')
     fill_in 'Comment', with: Faker::VentureBros.quote
     expect{ click_button 'Submit' }.to change(Comment, :count).by 1

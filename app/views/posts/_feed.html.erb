@@ -1,0 +1,40 @@
+<% @posts.each do |post| %>
+  <div class='post-box'>
+    <div class='post-text'>
+
+      <div class='post-author'>
+        <% if current_user == @user %>
+          <span>You said...</span>
+        <% else %>
+          <%= User.find(post.user_id).name %> said...
+        <% end %>
+      </div>
+      <div class='post-body'>
+        <%= post.body %>
+      </div>
+      <div class='post-reactions'>
+        <div class='likes'>
+          <%= post.likes.count %> Likes
+        </div>
+        <div class='comments'>
+          <%= post.comments.count %> Comments
+        </div>              
+      </div>
+    </div>
+
+    <div class='row post-links'>
+      <div class='col-xs-4'>
+        <%= render partial: "likes/link", locals: { post: post } %>
+      </div>
+      <div class='col-xs-4'>
+        <%= render partial: "comments/link", locals: { post: post } %>
+      </div>
+      <div class='col-xs-4'>
+        <%= link_to url:"###" do %>
+          <i class='glyphicon glyphicon-share'></i><br>
+          <span>Share</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
