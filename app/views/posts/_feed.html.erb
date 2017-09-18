@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class='row post-links'>
+    <div class='post-links'>
       <div class='col-xs-4'>
         <%= render partial: "likes/link", locals: { post: post } %>
       </div>
@@ -34,6 +34,22 @@
           <i class='glyphicon glyphicon-share'></i><br>
           <span>Share</span>
         <% end %>
+      </div>
+    </div>
+
+    <div class='toggle-comments'>
+      <button id='toggle-button' type="button" class="btn btn-info form-control" data-toggle="collapse" data-target="#post-<%= post.id %>">Toggle comments</button>
+      <div id="post-<%= post.id %>" class='collapse'>
+        <ul class='comment-list'>
+          <% post.comments.each do |comment| %>
+            <li class='comment'>
+              <%= comment.body %><br>
+              <span class='comment-commenter'><%= User.find(comment.user_id).name %> on 
+              <%= comment.date_print %>
+              </span>
+            </li>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>

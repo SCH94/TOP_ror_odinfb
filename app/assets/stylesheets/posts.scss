@@ -1,3 +1,4 @@
+// posts
 .post-box {
   background-color: white;
   border: solid 1px lightgrey;
@@ -32,6 +33,28 @@
     text-align: center;
   }
 }
+
+// comments
+
+.toggle-comments > button {
+  margin-top: 10px;
+}
+
+.comment-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.comment {
+  margin: 10px 10px;
+}
+
+.comment-commenter {
+  font-weight: bold;
+  color: gray;
+}
+
 
 // new posts
 #post-box {
