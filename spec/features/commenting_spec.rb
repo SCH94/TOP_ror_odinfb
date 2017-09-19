@@ -5,7 +5,7 @@ describe 'Comment management', type: :feature do
   before :example do
     @poster = create(:user)
     @commenter = create(:user)
-    @post = @poster.posts.create(title: "Title", body: "Body of post")
+    @post = @poster.posts.create(title: 'Title', body: 'Body of post')
     create(:friendship, user_id: @commenter.id, friend_id: @poster.id, accepted: true)
     log_in(@commenter)
   end

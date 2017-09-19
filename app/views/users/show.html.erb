@@ -5,31 +5,31 @@
   </div>
 </div>
 
-<div class='row'>
+<div id='friends-active' class='row'>
   <div class='col-xs-10 col-xs-offset-1'>
     <h2>Friends</h2>
     <% @friendships.each do |friendship| %>
       <li>
         <%= find_user(friendship.return_friend_id(@user.id)).name %>
-        <%= link_to "Remove friend", friendship_path(friendship), method: :delete %>
+        <%= link_to 'Remove friend', friendship_path(friendship), id: 'Remove', method: :delete %>
       </li>
     <% end %>
   </div>
 </div>
 
-<div class='row'>
+<div id='friends-pending' class='row'>
   <div class='col-xs-10 col-xs-offset-1'>
     <h2>Pending</h2>
     <% @pending_friendships.each do |request| %>
       <li>
         <%= find_user(request.user_id).name %>
-        <%= link_to "Accept", friendship_path(request), method: "put" %>
+        <%= link_to 'Accept request', friendship_path(request), id: 'Accept', method: 'put' %>
       </li>
     <% end %>
   </div>
 </div>
 
-<div id="profile-posts" class='row'>
+<div id='profile-posts' class='row'>
   <div class='col-xs-10 col-xs-offset-1'>
     <h2>Posts</h2>
   </div>

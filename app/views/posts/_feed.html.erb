@@ -39,7 +39,7 @@
 
     <div class='toggle-comments'>
       <button id='toggle-button' type="button" class="btn btn-info form-control" data-toggle="collapse" data-target="#post-<%= post.id %>">Toggle comments</button>
-      <div id="post-<%= post.id %>" class='collapse'>
+      <div id="post-#{ post.id }" class='collapse'>
         <ul class='comment-list'>
           <% post.comments.each do |comment| %>
             <li class='comment'>

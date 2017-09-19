@@ -7,8 +7,11 @@
 
 <div id='feed-posts' class='row'>
   <div class='row'>
-    <div class='col-xs-6 col-xs-offset-3'>
+    <div id='new-post-button' class='col-xs-6 col-xs-offset-3'>
       <%= link_to 'Create post', new_post_path, class: 'btn btn-primary form-control' %>
+    </div>
+    <div id='users-button' class='col-xs-6 col-xs-offset-3'>
+      <%= link_to 'See all users', users_path, class: 'btn btn-warning form-control'%>
     </div>
   </div>
   <div class='col-xs-12'>

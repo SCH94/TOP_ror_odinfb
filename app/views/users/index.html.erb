@@ -3,11 +3,16 @@
 <% @users.each do |user| %>
   <p>
     <strong>
-      <%= link_to "#{user.name}", user_path(user) %></strong>
-    <% if current_user.friends.include?(user)%>
-      <%= "Already friended" %>
-    <% else %>
-      <%= link_to "Request Friend", friendships_path(friend_id: user), method: :post %>
-    <% end %>
+      <%= link_to "#{user.name}", user_path(user) %>
+    </strong>
+    <div class="friendship-state">
+      <% if current_user.active_friends.include?(user)%>
+        <%= "Already friended" %>
+      <% elsif current_user.pending_friends.include?(user) %>
+        <%= "Already requested" %>
+      <% else %>
+        <%= link_to "Request Friend", friendships_path(friend_id: user), method: :post %>
+      <% end %>
+    </div>
   </p>
 <% end %>
