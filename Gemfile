@@ -40,6 +40,7 @@ end
 group :test do
   gem 'guard-rspec', '~> 4.7'
   gem 'launchy', '~> 2.4'
+  gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

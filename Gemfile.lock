@@ -76,6 +76,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    database_cleaner (1.6.1)
     devise (4.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -273,6 +274,7 @@ DEPENDENCIES
   capybara-selenium (~> 0.0.6)
   chromedriver-helper (~> 1.1)
   coffee-rails (~> 4.2)
+  database_cleaner (~> 1.6, >= 1.6.1)
   devise (~> 4.3)
   factory_girl_rails (~> 4.8)
   faker (~> 1.8)
