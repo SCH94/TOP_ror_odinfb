@@ -28,6 +28,6 @@ class FriendshipsController < ApplicationController
     end
     @friendship.destroy
     flash[:notice] = "You've unfriended someone."
-    redirect_to current_user
+    redirect_to session[:return_to]
   end
 end

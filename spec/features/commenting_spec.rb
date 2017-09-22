@@ -48,10 +48,10 @@ describe 'Comment management', type: :feature do
     scenario 'toggling comments into view' do
       @post.comments.create(body: 'This is a comment.', user_id: @commenter.id)
       visit authenticated_root_path
-      expect(page).to_not have_content('This is a comment')
+      expect(page).to_not have_content('This is a comment.')
       
-      click_button 'Toggle comments'
-      expect(page).to have_content('This is a comment')
+      click_on 'Toggle comments'
+      expect(page).to have_content('This is a comment.')
     end
 
     scenario 'toggling comments out of view' do
@@ -59,11 +59,11 @@ describe 'Comment management', type: :feature do
       visit authenticated_root_path
      
       click_button 'Toggle comments'
-      expect(page).to have_content('This is a comment')
+      expect(page).to have_content('This is a comment.')
       
       sleep 1
       click_button 'Toggle comments'
-      expect(page).to_not have_content('This is a comment')
+      expect(page).to_not have_content('This is a comment.')
     end
   end
 end

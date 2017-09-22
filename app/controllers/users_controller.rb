@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
+    session[:return_to] = request.fullpath
+    
     if user_signed_in?
       @users = User.all_except(current_user)
     else

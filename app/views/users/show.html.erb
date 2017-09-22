@@ -8,24 +8,36 @@
 <div id='friends-active' class='row'>
   <div class='col-xs-10 col-xs-offset-1'>
     <h2>Friends</h2>
-    <% @friendships.each do |friendship| %>
-      <li>
-        <%= find_user(friendship.return_friend_id(@user.id)).name %>
-        <%= link_to 'Remove friend', friendship_path(friendship), id: 'Remove', method: :delete %>
-      </li>
-    <% end %>
+    <table>
+      <% @friendships.each do |friendship| %>
+        <tr>
+          <td>
+            <%= find_user(friendship.return_friend_id(@user.id)).name %>
+          </td>
+          <td>
+            <%= link_to 'Remove friend', friendship_path(friendship), id: 'Remove', class: 'btn btn-danger', method: :delete %>
+          <td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 </div>
 
 <div id='friends-pending' class='row'>
   <div class='col-xs-10 col-xs-offset-1'>
     <h2>Pending</h2>
-    <% @pending_friendships.each do |request| %>
-      <li>
-        <%= find_user(request.user_id).name %>
-        <%= link_to 'Accept request', friendship_path(request), id: 'Accept', method: 'put' %>
-      </li>
-    <% end %>
+    <table>
+      <% @pending_friendships.each do |request| %>
+        <tr>
+          <td>
+            <%= find_user(request.user_id).name %>
+          </td>
+          <td>
+            <%= link_to 'Accept request', friendship_path(request), id: 'Accept', class:'btn btn-success', method: 'put' %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 </div>
 
