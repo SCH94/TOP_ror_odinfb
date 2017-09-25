@@ -15,6 +15,8 @@ gem 'figaro', '~> 1.1'
 gem 'devise', '~> 4.3'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'omniauth-facebook', '~> 4.0'
+gem 'omniauth-google-oauth2', '~> 0.5.2'
+gem 'font-awesome-rails', '~> 4.7'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
