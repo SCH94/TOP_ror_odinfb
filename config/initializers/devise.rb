@@ -254,6 +254,7 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :facebook, ENV['FB_APP_ID'], 
                              ENV['FB_APP_SECRET']
+                             
   config.omniauth :google_oauth2, ENV['GOOGLE_APP_ID'],
                                   ENV['GOOGLE_APP_SECRET']
 
