@@ -1,0 +1,9 @@
+
+Welcome to OdinBook, <%= @user.name %>
+===============================================
+ 
+You have successfully signed up. Please confirm your account by clicking on the following link:
+ 
+<%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %>
+ 
+Thanks for joining and have a great day!
