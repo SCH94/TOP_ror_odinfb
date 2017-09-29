@@ -3,12 +3,12 @@ require 'rails_helper'
 describe 'Friend management', type: :feature do
 
   before :example do
-    @sender = create(:user)
-    @receiver = create(:user)
+    @sender = create(:confirmed_user)
+    @receiver = create(:confirmed_user)
   end
   
   scenario 'sending a friend request' do
-    log_in @sender
+    login_as(@sender)
     visit authenticated_root_path
     click_link 'See all users'
     expect(current_path).to eq users_path
@@ -21,7 +21,7 @@ describe 'Friend management', type: :feature do
 
   scenario 'accepting a friend request' do
     @sender.friendships.create(friend_id: @receiver.id)
-    log_in @receiver
+    login_as(@receiver)
     visit user_path @receiver
     within('#friends-pending'){ expect(page).to have_content @sender.name }
     click_on 'Accept'
@@ -36,7 +36,7 @@ describe 'Friend management', type: :feature do
 
   scenario 'deleting a friend' do
     create(:friendship, user_id: @sender.id, friend_id: @receiver.id)
-    log_in @sender
+    login_as(@sender)
     visit user_path @sender
     within('#friends-active'){ expect(page).to have_content @receiver.name }
     click_on 'Remove'

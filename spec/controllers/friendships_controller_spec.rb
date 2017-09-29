@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe FriendshipsController do
   describe 'GET #create' do
-    let (:user) { create(:user) }
-    let (:friend) { create(:user) }
+    let (:user) { create(:confirmed_user) }
+    let (:friend) { create(:confirmed_user) }
 
     context 'when successful' do
       it 'creates a new friendship' do
@@ -32,8 +32,6 @@ describe FriendshipsController do
         get :create, params: { friends_id: nil }
         expect(response).to redirect_to users_path
       end
-
-
     end
   end
 end

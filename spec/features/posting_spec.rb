@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe 'Post management', type: :feature do
   before :example do
-    @user = create(:user)
-    log_in(@user)
+    @user = create(:confirmed_user)
+    login_as(@user)
   end
 
   context 'from the feed' do

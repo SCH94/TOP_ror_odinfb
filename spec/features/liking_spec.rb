@@ -2,12 +2,12 @@ require 'rails_helper'
 
 describe 'Like management', type: :feature do
   before :example do
-    @poster = create(:user)
-    @liker = create(:user)
+    @poster = create(:confirmed_user)
+    @liker = create(:confirmed_user)
     @post = @poster.posts.create(title: "Title", body: "Body of post")
     create(:friendship, user_id: @liker.id, friend_id: @poster.id, accepted: true)
 
-    log_in(@liker)
+    login_as(@liker)
   end
 
   context 'from the feed' do

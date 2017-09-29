@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 describe UsersController do
+  let (:user) { create(:confirmed_user) }
+
   describe 'GET #index' do
     context 'while logged in' do
       it 'renders the :index template' do
-        sign_in create(:user)
+        sign_in user
         get :index
         expect(response).to have_http_status(:success)
       end
@@ -24,7 +26,6 @@ describe UsersController do
   end
 
   describe 'GET #show' do
-    let (:user) { create(:user) }
     context 'while logged in' do
       it 'renders the :show template' do
         sign_in user
