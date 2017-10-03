@@ -30,9 +30,9 @@ describe 'Friend management', type: :feature do
     expect(page).to have_content "Successfully confirmed friend!"
   end
 
-  xscenario 'rejecting a friend request' do
-    #code
-  end
+  # scenario 'rejecting a friend request' do
+  #   #code
+  # end
 
   scenario 'deleting a friend' do
     create(:friendship, user_id: @sender.id, friend_id: @receiver.id)
