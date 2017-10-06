@@ -1,9 +1,77 @@
 require 'rails_helper'
 
 describe User, type: :model do
+  let(:user) { create(:user) }
+  let(:requested_friend) { create(:user) }
+  let(:requesting_friend) { create(:user) }
+  let(:post) { create(:post) }
+
+  let(:requested_friendship) {
+    create(
+      :friendship,
+      user_id: user.id,
+      friend_id: requested_friend.id
+    )
+  }
+
+  let(:requesting_friendship) {
+    create(
+      :friendship,
+      user_id: requesting_friend.id,
+      friend_id: user.id
+    )
+  }
+
+  before :each do
+    requested_friendship
+    requesting_friendship
+  end
   
-  it 'has a valid factory' do
-    expect(build(:user)).to be_valid
+  describe '#friends' do
+    it "returns user's friends requested and accepted" do
+      expect(user.friends).to include(requested_friend)
+    end
+
+    it "returns user's friends requesting and accepted" do
+      expect(user.friends).to include(requesting_friend)
+    end
   end
 
+  describe '#all_friendships' do
+    it "returns friendships requested and accepted" do
+      expect(user.all_friendships).to include(requested_friendship)
+    end 
+
+    it "returns friendships requesting and accepted" do
+      expect(user.all_friendships).to include(requesting_friendship)
+    end
+  end
+
+  describe '#like!()' do
+    it "creates a like on a post" do
+      user.like!(post)
+      expect(post.likes.count).to eq(1)
+    end
+  end
+
+  describe '#like?()' do
+    it "returns the like if the post has already been liked" do
+      user.like!(post)
+      expect(user.like?(post)).to be_in(user.likes)
+    end
+
+    it "returns nil if the post has not been liked" do
+      expect(user.like?(post)).to be(nil)
+    end
+  end
+
+  describe '#feed' do
+    it "returns all posts by user and friends" do
+      post1 = create(:post, user: user)
+      post2 = create(:post, user: requested_friend)
+      post3 = create(:post, user: requesting_friend)
+
+      expect(user.feed).to match_array([post1, post2, post3])
+    end
+  end
 end
