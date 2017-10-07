@@ -1,7 +1,9 @@
 # Odin Facebook
-Odin Facebook is the final project of The Odin Project's Rails curriculum. The assignment can be found [here](https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project).
+Odin Facebook is the final project of The Odin Project's Rails curriculum. The assignment can be found [here](https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project). The project is live via Heroku [here](https://obscure-springs-25850.herokuapp.com/)
 
-The project is live via Heroku [here](###)
+The primary challenge was configuring the user associations, given that, in a symmetrical, Facebook-style relationship, a user can be either a user requesting a friendship or a user receiving a friendship request.
+
+This project was a also the first opportunity I had to play around with Devise, which is a beast in and of itself.
 
 ## Getting Started
 N/A
@@ -14,24 +16,26 @@ N/A
 
 ## Running the tests
 1. Make sure you have RSpec installed
-    
+
     `gem install rspec`
+
 2. Run the tests!
-    
+
     `$ rspec`
 
 ## Deployment
-TO-DO
+N/A
 
 ## Built With
 * [Ruby on Rails](http://rubyonrails.org/) - Web framework
+* [Devise](https://github.com/plataformatec/devise) - Authentication
 * [Rspec](http://rspec.info) - Test suite
 * [Bootstrap](http://getbootstrap.com/) - CSS framework
 * [Heroku](https://www.heroku.com/home) - Cloud platform/server
 * [SendGrid](https://sendgrid.com/) - Email delivery service
 
-## To complete
-TO DO
+## To-Do
+1. Add testing for Mailer
 
 ## Contributing
 1. Fork it!
@@ -52,4 +56,6 @@ N/A
 
 ## Acknowledgments
 * The Odin Project
+* Google
+* Stack Overflow
 * [RailsCasts #163: Self-Referential Association](http://railscasts.com/episodes/163-self-referential-association)
