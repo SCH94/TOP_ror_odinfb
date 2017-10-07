@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe User, type: :model do
+RSpec.describe User, type: :model do
   let(:user) { create(:user) }
   let(:requested_friend) { create(:user) }
   let(:requesting_friend) { create(:user) }
@@ -25,6 +25,13 @@ describe User, type: :model do
   before :each do
     requested_friendship
     requesting_friendship
+  end
+
+  describe ':all_except' do
+    it "scopes to exclude a user" do
+      users = User.all_except(user)
+      expect(users).to_not include(user)
+    end
   end
   
   describe '#friends' do
@@ -72,6 +79,21 @@ describe User, type: :model do
       post3 = create(:post, user: requesting_friend)
 
       expect(user.feed).to match_array([post1, post2, post3])
+    end
+  end
+
+  describe '#from_omniauth()' do
+    it "returns a user" do
+      omniauth = { 
+        provider: 'facebook',
+        uid: '12345',
+        info: {
+          email: user.email,
+          password: Devise.friendly_token[0, 20],
+          name: user.name                              
+        }
+      }
+      expect(User.from_omniauth(omniauth[:info])).to eq(user)
     end
   end
 end
