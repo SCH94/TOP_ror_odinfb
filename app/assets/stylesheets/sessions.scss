@@ -42,7 +42,7 @@ body {
 }
 
 // welcome page
-#signin-box {
+.session-box {
   background-color: rgba(255, 255, 255, 0.80);
   padding-bottom: 20px;
 }
@@ -78,4 +78,28 @@ a.social-login__btn--google {
   padding-top: 15px;
   padding-bottom: 15px;
   text-align: center;
+}
+
+.signup-box__content {
+  display: flex;
+}
+
+.signup-box__text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-box__button {
+  display: flex;
+  justify-content: center;
+}
+
+//shared links
+#shared-links {
+  margin-top: 15px;
+}
+
+.confirm-link {
+  margin-top: 50px;
 }
