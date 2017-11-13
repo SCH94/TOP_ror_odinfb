@@ -1,15 +1,14 @@
-<div class='row'>
-  <div id='sign-up-social' class='col-xs-12'>
-    <span> -- OR --</span>
-  </div>
-  <div id='sign-up-social' class='col-xs-12'>
+<div class='social-login__text'>
+  <p>- Or use Social Login -</p>
+
+  <div class='row'>
     <% if devise_mapping.omniauthable? %>
-      <%= link_to omniauth_authorize_path(resource_name, :facebook) do %>
-        <i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i>
-      <% end %>
-      <%= link_to omniauth_authorize_path(resource_name, :google_oauth2) do %>
-        <i class="fa fa-google-plus-official fa-2x" aria-hidden="true"></i>
-      <% end %>
+      <div class='col-xs-6'>
+        <%= link_to 'Facebook', omniauth_authorize_path(resource_name, :facebook), class: 'btn btn-block social-login__btn--fbook' %>
+      </div>
+      <div class='col-xs-6'>
+        <%= link_to 'Google+', omniauth_authorize_path(resource_name, :google_oauth2), class: 'btn btn-block social-login__btn--google' %>
+      </div>
     <% end %>
   </div>
 </div>
