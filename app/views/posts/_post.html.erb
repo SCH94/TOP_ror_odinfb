@@ -1,0 +1,39 @@
+<div class='individual-post'>
+
+  <div class='post-text'>
+    <div class='post-header'>
+      <span class='post-author'><%= post.author_name %></span><br />
+      <span class='post-time'><%= time_ago_in_words(post.created_at) %> ago</span>
+    </div>
+
+    <div class='post-body'>
+      <%= post.body %>
+    </div>
+
+    <div class='row post-links'>
+      <div class='col-xs-5 col-sm-4'>
+        <%= render partial: "likes/link_to_like", locals: { post: post } %>
+      </div>
+      <div class='col-xs-6 col-sm-5'>
+        <%= render partial: "comments/link_to_comment", locals: { post: post } %>
+      </div>
+    </div>
+    
+    <div>
+      <%= pluralize(post.likes_count, 'person') %> liked this
+    </div>
+  </div>
+
+  <div>
+    <button id='toggle-button' type="button" class="btn btn-info form-control" data-toggle="collapse" data-target="#post-<%= post.id %>">
+      <%= text_for_comment_toggle(post) %>
+    </button>
+    
+    <div id="post-<%= post.id %>" class='collapse'>
+      <ul class='comment-list'>
+        <%= render partial: 'comments/comment', collection: post.comments %>
+      </ul>
+    </div>
+  </div>
+
+</div>

@@ -1,41 +1,48 @@
-// posts
-.post-box {
-  background-color: white;
-  border: solid 1px lightgrey;
-  padding: 10px 10px;
-  margin: 10px 0px;
+.button-group {
+  margin: 30px 0px 15px;
 }
 
-.post-text {
+#all-posts-box {
+  margin-top: 15px;
+}
+
+.individual-post {
+  background-color: white;
+  border: solid 1px lightgrey;
+  padding: 5% 5%;
+  margin: 10px 0px;
   font-size: 1em;
-  
   div {
     margin-bottom: 10px;
   }
 }
 
-.post-reactions {
-  display: flex;
-
-  .likes {
-    flex: 1;
-    text-align: center;
+//post
+.post-text {
+  .post-author {
+    font-weight: bold;
+    color: #3b5998;
   }
 
-  .comments {
-    flex: 1;
-    text-align: center;
+  .post-time {
+    font-size: .85em;
   }
+}
+
+.post-body {
+  font-size: 1.3em;
+  padding-bottom: 15px;
+  border-bottom: solid 1px lightgrey;
 }
 
 .post-links {
   div {
-    text-align: center;
+    text-align: left;
   }
 }
 
 // comments
-.toggle-comments > button {
+#toggle-button {
   margin-top: 10px;
 }
 
@@ -47,12 +54,18 @@
 
 .comment {
   margin: 10px 10px;
+
+  .comment-author{
+    font-size: 1.3em;
+  }
+  
+  .comment-commenter {
+    font-weight: bold;
+    color: gray;
+    font-size: .85em;
+  }
 }
 
-.comment-commenter {
-  font-weight: bold;
-  color: gray;
-}
 
 // new posts
 #post-box {
