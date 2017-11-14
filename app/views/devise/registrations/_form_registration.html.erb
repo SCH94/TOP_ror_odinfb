@@ -1,0 +1,37 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+  <div class="field form-group">
+    <% f.label :name %><br />
+    <%= f.text_field :name, 
+      autofocus: true,
+      id: 'Name',
+      placeholder: 'Enter your name',
+      class: 'form-control' %>
+
+    <% f.label :email %><br />
+    <%= f.email_field :email,
+      id: 'Email',
+      placeholder: 'Enter your email',
+      class: 'form-control' %>
+
+    <% f.label :password %><br />
+    <%= f.password_field :password, 
+      autocomplete: "off",
+      id: 'Password',
+      placeholder: 'Create a 6-character minimum password',
+      class: 'form-control' %>
+
+    <% f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, 
+      id: 'Password confirmation',
+      autocomplete: "off",
+      placeholder: 'Confirm your password',
+      class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up",
+      id: 'Sign up',
+      class: 'btn btn-primary form-control' %>
+  </div>
+<% end %>
