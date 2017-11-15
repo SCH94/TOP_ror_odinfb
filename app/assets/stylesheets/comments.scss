@@ -1,13 +1,33 @@
-// Place all the styles related to the Comments controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
-#comment-box {
+// comments
+#toggle-button {
   margin-top: 10px;
 }
 
-#comment-submit {
+.comment-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.comment {
+  margin: 10px 10px;
+
+  .comment-author{
+    font-size: 1.3em;
+  }
+  
+  .comment-commenter {
+    font-weight: bold;
+    color: gray;
+    font-size: .85em;
+  }
+}
+
+#comment-form {
   margin-top: 20px;
+}
+
+#comment-submit {
   margin-bottom: 15px
 }
 

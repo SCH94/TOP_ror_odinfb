@@ -1,0 +1,15 @@
+<div id='comment-form'>
+  <%= form_with model: @comment, url: post_comments_path, local: true do |f| %>
+    <div class='form-group'>
+      <% f.label :body, 'Comment' %>
+      <%= f.text_area :body, 
+        id: 'Comment',
+        autofocus: true,
+        class: 'form-control' %>
+    </div>
+    <div class='button-group'>
+      <%= f.submit 'Submit', id: 'comment-submit', class: 'btn btn-block btn-primary form-control' %>
+      <%= link_to 'Cancel', session[:return_to], class: 'btn btn-block btn-warning' %>
+    </div>
+  <% end %>
+</div>

@@ -1,5 +1,5 @@
 .button-group {
-  margin: 30px 0px 15px;
+  margin: 30px 0px 0px;
 }
 
 #all-posts-box {
@@ -9,15 +9,15 @@
 .individual-post {
   background-color: white;
   border: solid 1px lightgrey;
-  padding: 5% 5%;
-  margin: 10px 0px;
+  padding: 5% 5% 0%;
+  margin: 10px 0px 0px;
   font-size: 1em;
   div {
     margin-bottom: 10px;
   }
 }
 
-//post
+//feed
 .post-text {
   .post-author {
     font-weight: bold;
@@ -40,32 +40,6 @@
     text-align: left;
   }
 }
-
-// comments
-#toggle-button {
-  margin-top: 10px;
-}
-
-.comment-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.comment {
-  margin: 10px 10px;
-
-  .comment-author{
-    font-size: 1.3em;
-  }
-  
-  .comment-commenter {
-    font-weight: bold;
-    color: gray;
-    font-size: .85em;
-  }
-}
-
 
 // new posts
 #post-box {

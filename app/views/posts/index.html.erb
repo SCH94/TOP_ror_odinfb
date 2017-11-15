@@ -8,15 +8,17 @@
         <%= link_to 'Create a post', new_post_path, class: 'btn btn-block btn-primary form-control' %>
       </div>
   
-      <div id='users-button'>
+      <div>
         <%= link_to 'See all users', users_path, class: 'btn btn-block btn-warning form-control'%>
       </div>
     </div>
   </div>
 </div>
 
-<div id='all-posts-box' class='row content-box'>
-  <div class='col-xs-12'>
-    <%= render @posts %>
+<% unless @posts.blank? %>
+  <div id='all-posts-box' class='row content-box'>
+    <div class='col-xs-12'>
+      <%= render @posts %>
+    </div>
   </div>
-</div>
+<% end %>

@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to session[:return_to]
     else
-      flash.now[:error] = "There was a mistake"
+      flash.now[:danger] = "Can't submit a blank comment!"
       render :new
     end
   end
