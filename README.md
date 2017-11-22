@@ -3,7 +3,7 @@ Odin Facebook is the final project of The Odin Project's Rails curriculum. The a
 
 The primary challenge was configuring the user associations, given that, in a symmetrical, Facebook-style relationship, a user can be either a user requesting a friendship or a user receiving a friendship request.
 
-This project was a also the first opportunity I had to play around with Devise, which is a beast in and of itself.
+This project was also the first opportunity I had to play around with Devise, which is a beast in and of itself.
 
 ## Getting Started
 N/A
