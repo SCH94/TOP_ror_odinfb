@@ -1,0 +1,23 @@
+<div id='all-users-listed__individual' class='row'>
+  <div class='col-xs-12 col-sm-6'>
+    <strong>
+      <%= link_to "#{user.name}", user_path(user) %>
+    </strong>
+  </div>
+  <div class='all-users-listed__actions col-xs-6 col-sm-3'>
+    <% if current_user.active_friends.include?(user) %>
+      <%= 'Friended' %>
+    <% elsif current_user.pending_friends.include?(user) %>
+      <%= 'Requested' %>
+    <% else %>
+      <%= link_to 'Request', friendships_path(friend_id: user), class: 'btn btn-block btn-success', method: :post %>
+    <% end %>
+  </div>
+  <div class='all-users-listed__actions col-xs-6 col-sm-3'>
+    <% if current_user.active_friends.include?(user) %>
+      <%= link_to 'Delete', friendships_path(friend_id: user), class: 'btn btn-block btn-danger', method: :delete %>
+    <% elsif current_user.pending_friends.include?(user) %>
+      <%= link_to 'Delete', friendship_path(Friendship.find_by(friend_id: user.id)), class: 'btn btn-block btn-danger', method: 'delete' %>
+    <% end %>
+  </div>
+</div>

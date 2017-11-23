@@ -3,13 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // index
-table {
-  table-layout: fixed;
+#all-users-listed {
+  margin-top: 15px;
+}
+#all-users-listed__individual {
+  margin-bottom: 15px;
 }
 
-td {
-  height: 50px;
-  padding: 0px 10px;
+.all-users-listed__actions {
+  text-align: center;
 }
 
 // gravatar

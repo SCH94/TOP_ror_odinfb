@@ -1,38 +1,9 @@
-<div class='row'>
-  <div class='col-xs-10 col-xs-offset-1'>
+<div class='row content-box'>
+  <div class='col-xs-12'>
     <h1>User List</h1>
-  </div>
-</div>
-
-<div id='friends-active' class='row'>
-  <div class='col-xs-10 col-xs-offset-1'>
-    <table>
-      <% @users.each do |user| %>
-        <tr>
-          <td>
-            <strong>
-              <%= link_to "#{user.name}", user_path(user) %>
-            </strong>
-          </td>
-          <td class='friendship-state'>
-            <% if current_user.active_friends.include?(user) %>
-              <%= 'Already friended' %>
-            <% elsif current_user.pending_friends.include?(user) %>
-              <%= 'Already requested' %>
-            <% else %>
-              <%= link_to 'Request Friend', friendships_path(friend_id: user), class: 'btn btn-success', method: :post %>
-            <% end %>
-          </td>
-          <td class='removers'>
-            <% if current_user.active_friends.include?(user) %>
-              <%= link_to 'Delete friend', friendships_path(friend_id: user), class: 'btn btn-danger', method: :delete %>
-            <% elsif current_user.pending_friends.include?(user) %>
-              <%= link_to 'Delete request', friendship_path(Friendship.find_by(friend_id: user.id)), class: 'btn btn-danger', method: 'delete' %>
-            <% else %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
+    <h4>You may know some of them</h4>
+    <div id='all-users-listed'>
+      <%= render @users %>
+    </div>
   </div>
 </div>
