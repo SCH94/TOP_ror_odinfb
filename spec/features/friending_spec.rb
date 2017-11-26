@@ -13,10 +13,10 @@ describe 'Friend management', type: :feature do
     click_link 'See all users'
     expect(current_path).to eq users_path
     expect{
-      find_link('Request Friend').click
+      find_link('Request').click
     }.to change(Friendship, :count).by 1
     expect(page).to have_content 'Added friend.'
-    expect(page).to have_content 'Already requested'
+    expect(page).to have_content 'Requested'
   end
 
   scenario 'accepting a friend request' do

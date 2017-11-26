@@ -11,34 +11,36 @@ describe 'Comment management', type: :feature do
   end
   
   context 'commenting from the feed' do
-    scenario 'creating a comment' do
+    before :each do
       visit authenticated_root_path
       click_link 'Comment'
+    end
+
+    scenario 'creating a comment' do
       fill_in 'Comment', with: Faker::VentureBros.quote
       expect{ click_button 'Submit' }.to change(@post.comments, :count).by 1
       expect(current_path).to eq authenticated_root_path
     end
     
     scenario 'cancelling a comment' do
-      visit authenticated_root_path
-      click_link 'Comment'
       click_link 'Cancel'
       expect(current_path).to eq authenticated_root_path
     end
   end
   
   context 'commenting from a profile' do
-    scenario 'creating a comment' do
+    before :each do
       visit user_path(@poster)
       click_link 'Comment'
+    end
+
+    scenario 'creating a comment' do
       fill_in 'Comment', with: Faker::VentureBros.quote
       expect{ click_button 'Submit' }.to change(@post.comments, :count).by 1
       expect(current_path).to eq user_path(@poster)
     end
     
     scenario 'cancelling a comment' do
-      visit user_path(@poster)
-      click_link 'Comment'
       click_link 'Cancel'
       expect(current_path).to eq user_path(@poster)
     end
@@ -50,7 +52,7 @@ describe 'Comment management', type: :feature do
       visit authenticated_root_path
       expect(page).to_not have_content('This is a comment.')
       
-      click_on 'Toggle comments'
+      click_on 'toggle-button'
       expect(page).to have_content('This is a comment.')
     end
 
@@ -58,11 +60,11 @@ describe 'Comment management', type: :feature do
       @post.comments.create(body: 'This is a comment.', user_id: @commenter.id)
       visit authenticated_root_path
      
-      click_button 'Toggle comments'
+      click_button 'toggle-button'
       expect(page).to have_content('This is a comment.')
       
       sleep 1
-      click_button 'Toggle comments'
+      click_button 'toggle-button'
       expect(page).to_not have_content('This is a comment.')
     end
   end
