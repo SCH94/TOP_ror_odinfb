@@ -1,59 +1,70 @@
-<div class='row'>
-  <div class='col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2'>
-    <h1>Your Profile</h1>
+<div class='row content-box'>
+  <div class='col-xs-12'>
+    <h1>
+      <% if current_user == @user %>
+        Your Profile
+      <% else %>
+        <%= @user.name %>'s Profile
+      <% end %>
+    </h1>
     <h4>
       <%= gravatar_for @user %>
       <%= @user.name %>
     </h4>
   </div>
+
+  <% unless current_user != @user %>
+    <div id='friends-active'>
+      <div class='col-xs-12'>
+        <h2>Friends</h2>
+        <table>
+          <% @friendships.each do |friendship| %>
+            <tr>
+              <td>
+                <%= find_user(friendship.return_friend_id(@user.id)).name %>
+              </td>
+              <td>
+                <%= link_to 'Remove friend', friendship_path(friendship), id: 'Remove', class: 'btn btn-danger', method: :delete %>
+              <td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+    <div id='friends-pending'>
+      <div class='col-xs-12'>
+        <h2>Pending</h2>
+        <table>
+          <% @pending_friendships.each do |request| %>
+            <tr>
+              <td>
+                <%= find_user(request.user_id).name %>
+              </td>
+              <td>
+                <%= link_to 'Accept request', friendship_path(request), id: 'Accept', class:'btn btn-success', method: 'put' %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  <% end %>
 </div>
 
-<div id='friends-active' class='row'>
-  <div class='col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2'>
-    <h2>Friends</h2>
-    <table>
-      <% @friendships.each do |friendship| %>
-        <tr>
-          <td>
-            <%= find_user(friendship.return_friend_id(@user.id)).name %>
-          </td>
-          <td>
-            <%= link_to 'Remove friend', friendship_path(friendship), id: 'Remove', class: 'btn btn-danger', method: :delete %>
-          <td>
-        </tr>
+<div class="row content-box">
+  <div id='profile-posts'>
+    <div class='col-xs-12'>
+      <h2>Posts</h2>
+    </div>
+    <div class='col-xs-12'>
+      <% if current_user == @user %>
+        <%= link_to 'Create a post', new_post_path, class: 'btn btn-primary form-control' %>
       <% end %>
-    </table>
+    </div>
+    <div class='col-xs-12'>
+      <%= render @posts %>
+    </div>  
   </div>
-</div>
 
-<div id='friends-pending' class='row'>
-  <div class='col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2'>
-    <h2>Pending</h2>
-    <table>
-      <% @pending_friendships.each do |request| %>
-        <tr>
-          <td>
-            <%= find_user(request.user_id).name %>
-          </td>
-          <td>
-            <%= link_to 'Accept request', friendship_path(request), id: 'Accept', class:'btn btn-success', method: 'put' %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
 
-<div id='profile-posts' class='row'>
-  <div class='col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2'>
-    <h2>Posts</h2>
-  </div>
-  <div class='col-xs-6 col-xs-offset-3'>
-    <% if current_user == @user %>
-      <%= link_to 'Create a post', new_post_path, class: 'btn btn-primary form-control' %>
-    <% end %>
-  </div>
-  <div class='col-xs-12'>
-    <%= render @posts %>
-  </div>  
-</div>
