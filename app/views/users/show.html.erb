@@ -18,7 +18,7 @@
       <div class='col-xs-12'>
         <h2>Friends</h2>
         <table>
-          <% @friendships.each do |friendship| %>
+          <% @user.all_friendships.each do |friendship| %>
             <tr>
               <td>
                 <%= find_user(friendship.return_friend_id(@user.id)).name %>
@@ -42,7 +42,7 @@
                 <%= find_user(request.user_id).name %>
               </td>
               <td>
-                <%= link_to 'Accept request', friendship_path(request), id: 'Accept', class:'btn btn-success', method: 'put' %>
+                <%= link_to 'Accept request', friendship_path(request), id: 'Accept', class:'btn btn-success', method: :patch %>
               </td>
             </tr>
           <% end %>
@@ -63,7 +63,7 @@
       <% end %>
     </div>
     <div class='col-xs-12'>
-      <%= render @posts %>
+      <%= render @user.posts %>
     </div>  
   </div>
 

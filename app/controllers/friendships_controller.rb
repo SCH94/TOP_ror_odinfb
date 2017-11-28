@@ -14,6 +14,7 @@ class FriendshipsController < ApplicationController
 
   def update
     @friendship = current_user.received_friendships.find(params[:id])
+
     if @friendship.update(accepted: "true")
       redirect_to current_user, notice: "Successfully confirmed friend!"
     else
@@ -22,7 +23,7 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    @friendship.destroy
+    @friendship.delete
     flash[:notice] = "You've unfriended someone."
     redirect_to session[:return_to]
   end

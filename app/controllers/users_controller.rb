@@ -13,10 +13,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @friendships = @user.all_friendships
+    @user = User.includes(:posts).find(params[:id])
     @pending_friendships = @user.received_friendships.where(accepted: false)
-    @posts = @user.posts
     session[:return_to] = request.fullpath
   end
 end
