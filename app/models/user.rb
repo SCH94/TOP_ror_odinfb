@@ -34,6 +34,10 @@ class User < ApplicationRecord
     self.likes.find_by_post_id(post.id)
   end
 
+  def unlike(post)
+    self.likes.delete(Like.find_by(post_id: post.id))
+  end
+
   def feed
     Post.where("user_id IN (?, ?) OR user_id = ?", active_friend_ids, received_friend_ids, id).order(created_at: :desc)
   end
