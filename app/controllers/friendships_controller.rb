@@ -1,5 +1,6 @@
 class FriendshipsController < ApplicationController
   before_action :set_friendship_to_destroy, only: :destroy
+  
   def create
     @friendship = current_user.friendships.build(friend_id: params[:friend_id])
     if @friendship.save
