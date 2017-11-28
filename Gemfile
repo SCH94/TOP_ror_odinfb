@@ -25,7 +25,7 @@ group :development, :test do
   gem 'capybara-selenium', '~> 0.0.6'
   gem 'chromedriver-helper', '~> 1.1'
   gem 'rspec-rails', '~> 3.6'
-  gem 'factory_girl_rails', '~> 4.8'
+  gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
   gem 'faker', '~> 1.8'
 end
 
