@@ -13,7 +13,7 @@ class FriendshipsController < ApplicationController
   end
 
   def update
-    @friendship = current_user.received_friendships.find(params[:id])
+    @friendship = Friendship.find_by_user_id(params[:id])
 
     if @friendship.update(accepted: "true")
       redirect_to current_user, notice: "Successfully confirmed friend!"
