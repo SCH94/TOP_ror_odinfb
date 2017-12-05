@@ -54,24 +54,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#like!()' do
-    it "creates a like on a post" do
-      user.like!(post)
-      expect(post.likes.count).to eq(1)
-    end
-  end
-
-  describe '#like?()' do
-    it "returns the like if the post has already been liked" do
-      user.like!(post)
-      expect(user.like?(post)).to be_in(user.likes)
-    end
-
-    it "returns nil if the post has not been liked" do
-      expect(user.like?(post)).to be(nil)
-    end
-  end
-
   describe '#feed' do
     it "returns all posts by user and friends" do
       post1 = create(:post, user: user)

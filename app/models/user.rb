@@ -40,20 +40,12 @@ class User < ApplicationRecord
     self.friendships.where(accepted: true, user_id: self.id).or(self.received_friendships.where(accepted: true, friend_id: self.id))
   end
 
-  def like!(post)
-    self.likes.create!(post_id: post.id)
-  end
-
-  def like?(post)
-    self.likes.find_by_post_id(post.id)
-  end
-
-  def unlike(post)
-    self.likes.delete(Like.find_by(post_id: post.id))
-  end
-
   def feed
     Post.where("user_id IN (?, ?) OR user_id = ?", active_friend_ids, received_friend_ids, id).order(created_at: :desc)
+  end
+
+  def liked?(post)
+    self.likes.find_by_post_id(post)
   end
 
   def self.from_omniauth(auth)

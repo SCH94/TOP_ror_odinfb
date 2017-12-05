@@ -1,4 +1,4 @@
-<% if current_user.like?(post) %>
+<% if current_user.liked?(post) %>
   <%= link_to post_like_path(post_id: post.id, id: post.likes), method: :delete do %>
     <i class='glyphicon glyphicon-heart'></i>
     <span>Unlike</span>
