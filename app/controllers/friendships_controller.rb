@@ -5,7 +5,7 @@ class FriendshipsController < ApplicationController
     @friendship = current_user.friendships.build(friend_id: params[:friend_id])
     
     if @friendship.save
-      flash[:notice] = "Added friend."
+      flash[:notice] = "Sent a request."
       redirect_to users_path
     else
       flash[:error] = "Unable to add friend."
@@ -20,6 +20,16 @@ class FriendshipsController < ApplicationController
       redirect_to current_user, notice: "Successfully confirmed friend!"
     else
       redirect_to current_user, notice: "Sorry! Could not confirm friend!"
+    end
+  end
+
+  def decline
+    @friendship = Friendship.find_by_user_id(params[:id])
+    
+    if @friendship.delete
+      redirect_to current_user, notice: "Successfully declined request!"
+    else
+      redirect_to current_user, notice: "Sorry! Something went wrong!"
     end
   end
 

@@ -1,46 +1,111 @@
 require 'rails_helper'
 
 describe 'Friend management', type: :feature do
-
   before :example do
     @sender = create(:confirmed_user)
-    @receiver = create(:confirmed_user)
+    @user = create(:confirmed_user)
+    login_as(@user)
   end
   
-  scenario 'sending a friend request' do
-    login_as(@sender)
-    visit authenticated_root_path
-    click_link 'See all users'
-    expect(current_path).to eq users_path
-    expect{
-      find_link('Request').click
-    }.to change(Friendship, :count).by 1
-    expect(page).to have_content 'Added friend.'
-    expect(page).to have_content 'Requested'
+  describe "sending a friend request" do
+    before :each do
+      visit authenticated_root_path
+      click_link 'See all users'
+      click_link 'Request'
+    end
+
+    it "displays a successful alert" do
+      expect(page).to have_css("div.alert.alert-notice")
+    end
+    
+    it "displays text next to a requested user indicating that a request has been sent" do
+      expect(page).to have_content('Requested')
+    end
   end
 
-  scenario 'accepting a friend request' do
-    @sender.friendships.create(friend_id: @receiver.id)
-    login_as(@receiver)
-    visit user_path @receiver
-    within('#friends-pending'){ expect(page).to have_content @sender.name }
-    click_on 'Accept'
-    expect(current_path).to eq user_path(@receiver)
-    within('#friends-active'){ expect(page).to have_content @sender.name }
-    expect(page).to have_content "Successfully confirmed friend!"
+  describe "receiving a friend request" do
+    before :each do
+      @sender.friendships.create(friend_id: @user.id)
+    end
+
+    context "in the navbar" do
+      it "displays a number badge" do
+        visit authenticated_root_path
+        expect(find('span.badge')).to have_content(1)
+      end
+    end
+
+    context "in the user's profile" do
+      before :each do
+        visit user_path(@user)
+      end
+
+      it "displays the request sender's name" do
+        expect(page).to have_content(@sender.name)
+      end
+  
+      it "displays a button to accept the request" do
+        expect(page).to have_css('a.btn.btn-success')
+      end
+  
+      it "displays a button to decline the request" do
+        expect(page).to have_css('a.btn.btn-danger')
+      end
+    end
   end
 
-  # scenario 'rejecting a friend request' do
-  #   #code
-  # end
+  describe "accepting a friend request" do
+    before :each do
+      @sender.friendships.create(friend_id: @user.id)
 
-  scenario 'deleting a friend' do
-    create(:friendship, user_id: @sender.id, friend_id: @receiver.id)
-    login_as(@sender)
-    visit user_path @sender
-    within('#friends-active'){ expect(page).to have_content @receiver.name }
-    click_on 'Remove'
-    expect(current_path).to eq user_path @sender
-    within('#friends-active'){ expect(page).to_not have_content @receiver.name }
+      visit user_path(@user)
+      click_on 'Accept'
+    end
+
+    it "displays a successful alert" do
+      expect(page).to have_css("div.alert.alert-notice")
+    end
+
+    it "moves the new friend to the Active Friends subsection" do
+      within('#friends-active'){ expect(page).to have_content @sender.name }
+    end
+
+    it "displays a button to remove the friend" do
+      within('#friends-active'){ expect(page).to have_css('a.btn.btn-danger') }
+    end
+  end
+
+  describe "rejecting a friend request" do
+    before :each do
+      @sender.friendships.create(friend_id: @user.id)
+  
+      visit user_path(@user)
+      click_on 'Decline'
+    end
+
+    it "displays a successful alert" do
+      expect(page).to have_css("div.alert.alert-notice")
+    end
+
+    it "removes the requester's name from the user profile" do
+      expect(page).to_not have_content(@sender.name)
+    end
+  end
+
+  describe "deleting a friend" do
+    before :each do
+      create(:friendship, user_id: @sender.id, friend_id: @user.id)
+  
+      visit user_path(@user)
+      click_on 'Remove'
+    end
+
+    it "removes the friend's name from the user profile" do
+      expect(page).to_not have_content(@sender.name) 
+    end
+
+    it "displays a successful alert" do
+      expect(page).to have_css("div.alert.alert-notice")
+    end
   end
 end

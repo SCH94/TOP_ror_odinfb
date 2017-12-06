@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   end
   
   resources :users
+
   resources :friendships, only: [:create, :update, :destroy]
+  get 'friendships/:id', to: 'friendships#decline'
+  
   resources :posts do
     resources :likes, only: [:create, :destroy]
     resources :comments
