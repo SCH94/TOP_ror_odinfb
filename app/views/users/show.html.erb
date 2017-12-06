@@ -17,36 +17,14 @@
     <div id='friends-active'>
       <div class='col-xs-12'>
         <h2>Friends</h2>
-        <table>
-          <% @user.all_friendships.each do |friendship| %>
-            <tr>
-              <td>
-                <%= find_user(friendship.return_friend_id(@user.id)).name %>
-              </td>
-              <td>
-                <%= link_to 'Remove friend', friendship_path(friendship), id: 'Remove', class: 'btn btn-danger', method: :delete %>
-              <td>
-            </tr>
-          <% end %>
-        </table>
+        <%= render 'active_friends' %> 
       </div>
     </div>
 
     <div id='friends-pending'>
       <div class='col-xs-12'>
         <h2>Pending</h2>
-        <table>
-          <% @user.pending_friendships.each do |requester| %>
-            <tr>
-              <td>
-                <%= requester.name %>
-              </td>
-              <td>
-                <%= link_to 'Accept request', friendship_path(requester), id: 'Accept', class:'btn btn-success', method: :patch %>
-              </td>
-            </tr>
-          <% end %>
-        </table>
+        <%= render 'pending_friends' %>
       </div>
     </div>
   <% end %>

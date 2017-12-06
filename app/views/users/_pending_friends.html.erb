@@ -1,0 +1,10 @@
+<% @user.pending_friendships.each do |requester| %>
+  <div class='friends__individual row'>
+    <div class='col-xs-6 col-sm-4'>
+      <%= requester.name %>
+    </div>
+    <div class='col-xs-6 col-sm-4'>
+      <%= link_to 'Accept request', friendship_path(requester), id: 'Accept', class:'btn btn-success', method: :patch %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,10 @@
+<% @user.all_friendships.each do |friendship| %>
+  <div class='friends__individual row'>
+    <div class='col-xs-6 col-sm-4'>
+      <%= find_user(friendship.return_friend_id(@user.id)).name %>
+    </div>
+    <div class='col-xs-6 col-sm-4'>
+      <%= link_to 'Unfriend', friendship_path(friendship), id: 'Remove', class: 'btn btn-danger btn-block', method: :delete %>
+    </div>
+  </div>
+<% end %>
