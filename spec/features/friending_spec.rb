@@ -55,23 +55,40 @@ describe 'Friend management', type: :feature do
   end
 
   describe "accepting a friend request" do
-    before :each do
-      @sender.friendships.create(friend_id: @user.id)
+    context "for all requests" do
+      before :each do
+        @sender.friendships.create(friend_id: @user.id)
 
-      visit user_path(@user)
-      click_on 'Accept'
+        visit user_path(@user)
+        click_on 'Accept'
+      end
+
+      it "displays a successful alert" do
+        expect(page).to have_css("div.alert.alert-notice")
+      end
+
+      it "moves the new friend to the Active Friends subsection" do
+        within('#friends-active'){ expect(page).to have_content @sender.name }
+      end
+
+      it "displays a button to remove the friend" do
+        within('#friends-active'){ expect(page).to have_css('a.btn.btn-danger') }
+      end
     end
 
-    it "displays a successful alert" do
-      expect(page).to have_css("div.alert.alert-notice")
-    end
+    context "for symmetrical friend requests" do
+      it "removes the other user's pending request" do
+        friendship_1 = @sender.friendships.create(friend_id: @user.id)
+        friendship_2 = @user.friendships.create(friend_id: @sender.id)
 
-    it "moves the new friend to the Active Friends subsection" do
-      within('#friends-active'){ expect(page).to have_content @sender.name }
-    end
+        visit user_path(@user)
+        click_on 'Accept'
+        logout(@user)
 
-    it "displays a button to remove the friend" do
-      within('#friends-active'){ expect(page).to have_css('a.btn.btn-danger') }
+        login_as(@sender)
+        visit user_path(@sender)
+        within('#friends-pending') { expect(page).to_not have_content(@user.name) }
+      end
     end
   end
 

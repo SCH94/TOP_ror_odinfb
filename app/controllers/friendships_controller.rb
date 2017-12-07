@@ -1,4 +1,6 @@
 class FriendshipsController < ApplicationController
+  before_action :set_friendship_request, only: [:update, :decline]
+  after_action  :destroy_symmetrical_friendship, if: :symmetrical_friendship?, only: :update
   before_action :set_friendship_to_destroy, only: :destroy
   
   def create
@@ -14,32 +16,48 @@ class FriendshipsController < ApplicationController
   end
 
   def update
-    @friendship = Friendship.find_by_user_id(params[:id])
-
     if @friendship.update(accepted: "true")
-      redirect_to current_user, notice: "Successfully confirmed friend!"
+      flash[:notice] = "Successfully confirmed friend!"
+      redirect_to current_user
     else
-      redirect_to current_user, notice: "Sorry! Could not confirm friend!"
+      flash[:error] = "Sorry! Could not confirm friend!"
+      redirect_to current_user
     end
   end
 
   def decline
-    @friendship = Friendship.find_by_user_id(params[:id])
-    
-    if @friendship.delete
-      redirect_to current_user, notice: "Successfully declined request!"
+    if @friendship.destroy
+      flash[:notice] = "Successfully declined request!"
+      redirect_to current_user
     else
-      redirect_to current_user, notice: "Sorry! Something went wrong!"
+      flash[:error] = "Sorry! Something went wrong!"
+      redirect_to current_user
     end
   end
 
   def destroy
-    @friendship.delete
-    flash[:notice] = "You've unfriended someone."
-    redirect_to session[:return_to]
+    if @friendship.destroy
+      flash[:notice] = "You've unfriended someone."
+      redirect_to session[:return_to]
+    else
+      flash[:error] = "Sorry! Something went wrong!"
+      redirect_to current_user
+    end
   end
 
   private
+
+  def set_friendship_request
+    @friendship = Friendship.find_by(friend_id: params[:friend_id], user_id: params[:id])
+  end
+
+  def symmetrical_friendship?
+    @symmetrical_friendship = Friendship.find_by(friend_id: params[:id], user_id: params[:friend_id])
+  end
+
+  def destroy_symmetrical_friendship
+    @symmetrical_friendship.destroy
+  end
 
   def set_friendship_to_destroy
     begin

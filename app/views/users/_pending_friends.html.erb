@@ -4,10 +4,10 @@
       <%= requester.name %>
     </div>
     <div class='col-xs-6 col-sm-4'>
-      <%= link_to 'Accept request', friendship_path(requester), id: 'Accept', class:'btn btn-success', method: :patch %>
+      <%= link_to 'Accept request', friendship_path(friend_id: @user, id: requester), id: 'Accept', class:'btn btn-success', method: :patch %>
     </div>
     <div class='col-xs-6 col-sm-4'>
-      <%= link_to 'Decline request', friendship_path(requester), id: 'Decline', class:'btn btn-danger', controller: 'friendships', action: 'decline' %>
+      <%= link_to 'Decline request', friendship_path(friend_id: @user, id: requester), id: 'Decline', class:'btn btn-danger' %>
     </div>
   </div>
 <% end %>
