@@ -58,7 +58,6 @@ describe 'Friend management', type: :feature do
     context "for all requests" do
       before :each do
         @sender.friendships.create(friend_id: @user.id)
-
         visit user_path(@user)
         click_on 'Accept'
       end
@@ -95,7 +94,6 @@ describe 'Friend management', type: :feature do
   describe "rejecting a friend request" do
     before :each do
       @sender.friendships.create(friend_id: @user.id)
-  
       visit user_path(@user)
       click_on 'Decline'
     end
@@ -112,7 +110,6 @@ describe 'Friend management', type: :feature do
   describe "deleting a friend" do
     before :each do
       create(:friendship, user_id: @sender.id, friend_id: @user.id)
-  
       visit user_path(@user)
       click_on 'Remove'
     end
