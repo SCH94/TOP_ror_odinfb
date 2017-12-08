@@ -1,7 +1,8 @@
 class FriendshipsController < ApplicationController
   before_action :set_friendship_request, only: [:update, :decline]
-  after_action  :destroy_symmetrical_friendship, if: :symmetrical_friendship?, only: :update
   before_action :set_friendship_to_destroy, only: :destroy
+  
+  after_action  :destroy_symmetrical_friendship, if: :symmetrical_friendship?, only: :update
   
   def create
     @friendship = current_user.friendships.build(friend_id: params[:friend_id])
@@ -51,19 +52,16 @@ class FriendshipsController < ApplicationController
     @friendship = Friendship.find_by(friend_id: params[:friend_id], user_id: params[:id])
   end
 
-  def symmetrical_friendship?
-    @symmetrical_friendship = Friendship.find_by(friend_id: params[:id], user_id: params[:friend_id])
+  def set_friendship_to_destroy
+    @friendship = current_user.all_friendships.find_by(id: params[:id])
+    redirect_to current_user if @friendship.nil?
   end
-
+  
   def destroy_symmetrical_friendship
     @symmetrical_friendship.destroy
   end
-
-  def set_friendship_to_destroy
-    begin
-      @friendship = current_user.friendships.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      @friendship = current_user.received_friendships.find(params[:id])
-    end
+  
+  def symmetrical_friendship?
+    @symmetrical_friendship = Friendship.find_by(friend_id: params[:id], user_id: params[:friend_id])
   end
 end

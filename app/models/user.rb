@@ -28,7 +28,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
+         :omniauthable, :timeoutable, :omniauth_providers => [:facebook, :google_oauth2]
 
   scope :all_except, -> (user) { where.not(id: user.id) }
 
