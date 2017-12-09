@@ -11,27 +11,27 @@ class FriendshipsController < ApplicationController
       flash[:notice] = "Sent a request."
       redirect_to users_path
     else
-      flash[:error] = "Unable to add friend."
+      flash[:error] = "Sorry! Could not send request."
       redirect_to users_path
     end
   end
 
   def update
     if @friendship.update(accepted: "true")
-      flash[:notice] = "Successfully confirmed friend!"
+      flash[:notice] = "Successfully confirmed friend."
       redirect_to current_user
     else
-      flash[:error] = "Sorry! Could not confirm friend!"
+      flash[:error] = "Sorry! Could not confirm friend."
       redirect_to current_user
     end
   end
 
   def decline
     if @friendship.destroy
-      flash[:notice] = "Successfully declined request!"
+      flash[:notice] = "Successfully declined request."
       redirect_to current_user
     else
-      flash[:error] = "Sorry! Something went wrong!"
+      flash[:error] = "Sorry! Something went wrong."
       redirect_to current_user
     end
   end
@@ -41,7 +41,7 @@ class FriendshipsController < ApplicationController
       flash[:notice] = "You've unfriended someone."
       redirect_to session[:return_to]
     else
-      flash[:error] = "Sorry! Something went wrong!"
+      flash[:error] = "Sorry! Could not unfriend."
       redirect_to current_user
     end
   end
