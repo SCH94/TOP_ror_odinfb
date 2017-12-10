@@ -53,7 +53,7 @@ class FriendshipsController < ApplicationController
   end
 
   def set_friendship_to_destroy
-    @friendship = current_user.all_friendships.find_by(id: params[:id])
+    @friendship = current_user.accepted_friendships.find_by(id: params[:id])
     redirect_to current_user if @friendship.nil?
   end
   

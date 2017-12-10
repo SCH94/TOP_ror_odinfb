@@ -4,7 +4,15 @@ describe FriendshipsController do
   let (:user)   { create(:confirmed_user) }
   let (:friend) { create(:confirmed_user) }
   let (:third)  { create(:confirmed_user) }
-  let (:friendship) { create(:friendship, user_id: user.id, friend_id: friend.id) }
+  
+  let (:friendship) { 
+    create(
+      :friendship,
+      user_id: user.id,
+      friend_id: friend.id,
+      accepted: true
+    )
+  }
   
   describe 'POST #create' do
     context 'when successful' do

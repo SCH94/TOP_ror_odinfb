@@ -59,6 +59,7 @@ describe 'Friend management', type: :feature do
       before :each do
         @sender.friendships.create(friend_id: @user.id)
         visit user_path(@user)
+
         click_on 'Accept'
       end
 
@@ -77,8 +78,12 @@ describe 'Friend management', type: :feature do
 
     context "for symmetrical friend requests" do
       it "removes the other user's pending request" do
-        friendship_1 = @sender.friendships.create(friend_id: @user.id)
-        friendship_2 = @user.friendships.create(friend_id: @sender.id)
+        friendship_1 = @sender.friendships.create(
+          friend_id: @user.id,
+        )
+        friendship_2 = @user.friendships.create(
+          friend_id: @sender.id,
+        )
 
         visit user_path(@user)
         click_on 'Accept'
@@ -93,7 +98,9 @@ describe 'Friend management', type: :feature do
 
   describe "rejecting a friend request" do
     before :each do
-      @sender.friendships.create(friend_id: @user.id)
+      @sender.friendships.create(
+        friend_id: @user.id,
+      )
       visit user_path(@user)
       click_on 'Decline'
     end
@@ -109,7 +116,10 @@ describe 'Friend management', type: :feature do
 
   describe "deleting a friend" do
     before :each do
-      create(:friendship, user_id: @sender.id, friend_id: @user.id)
+      create(:friendship,
+        user_id: @sender.id,
+        friend_id: @user.id,
+        accepted: true)
       visit user_path(@user)
       click_on 'Remove'
     end

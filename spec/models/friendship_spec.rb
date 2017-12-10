@@ -4,18 +4,21 @@ RSpec.describe Friendship, type: :model do
   let (:user) { create(:user) }
   let (:friend1) { create(:user) }
   let (:friend2) { create(:user) }
+  
   let (:friendship1) {
     create(
       :friendship,
       user_id: user.id,
-      friend_id: friend1.id
+      friend_id: friend1.id,
+      accepted: true
     )    
   }
   let (:friendship2) {
     create(
       :friendship,
       user_id: friend2.id,
-      friend_id: user.id
+      friend_id: user.id,
+      accepted: true,
     )    
   }
 

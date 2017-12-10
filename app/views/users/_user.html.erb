@@ -5,7 +5,7 @@
     </strong>
   </div>
   <div class='all-users-listed__actions col-xs-6 col-sm-4'>
-    <% if current_user.active_friends.include?(user) %>
+    <% if current_user.accepted_friends.include?(user) %>
       <%= 'Friended' %>
     <% elsif current_user.awaiting_friendships.include?(user) %>
       <%= 'Requested' %>
@@ -14,7 +14,7 @@
     <% end %>
   </div>
   <div class='all-users-listed__actions col-xs-6 col-sm-4'>
-    <% if current_user.active_friends.include?(user) %>
+    <% if current_user.accepted_friends.include?(user) %>
       <%= link_to 'Unfriend', friendship_path(user), class: 'btn btn-block btn-danger', method: :delete %>
     <% elsif current_user.awaiting_friendships.include?(user) %>
       <%= link_to 'Delete', friendship_path(Friendship.find_by(friend_id: user.id)), class: 'btn btn-block btn-danger', method: :delete %>

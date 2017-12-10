@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :received_friendships, class_name: "Friendship", foreign_key: "friend_id"
 
-  has_many :active_friends,
+  has_many :requested_friends,
     -> { where(friendships: { accepted: true }) },
     through: :friendships,
     source: :friend
@@ -32,16 +32,16 @@ class User < ApplicationRecord
 
   scope :all_except, -> (user) { where.not(id: user.id) }
 
-  def friends
-    active_friends | received_friends
+  def accepted_friends
+    requested_friends | received_friends
   end
 
-  def all_friendships
+  def accepted_friendships
     self.friendships.where(accepted: true, user_id: self.id).or(self.received_friendships.where(accepted: true, friend_id: self.id))
   end
 
   def feed
-    Post.where("user_id IN (?, ?) OR user_id = ?", active_friend_ids, received_friend_ids, id).order(created_at: :desc)
+    Post.where("user_id IN (?) OR user_id = ?", (requested_friend_ids + received_friend_ids), id).order(created_at: :desc)
   end
 
   def liked?(post)
