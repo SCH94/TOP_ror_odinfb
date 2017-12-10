@@ -1,4 +1,4 @@
-class UserLike
+class UserLikeService
   def initialize(user, post)
     @user = user
     @post = post
