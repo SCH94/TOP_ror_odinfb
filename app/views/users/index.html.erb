@@ -3,7 +3,15 @@
     <h1>User List</h1>
     <h4>You may know some of them</h4>
     <div id='all-users-listed'>
+      <div class='pagination__links'>
+        <%= will_paginate %>
+      </div>
+      
       <%= render @users %>
+      
+      <div class='pagination__links'>
+        <%= will_paginate %>
+      </div>
     </div>
   </div>
 </div>

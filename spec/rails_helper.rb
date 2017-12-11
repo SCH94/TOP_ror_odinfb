@@ -79,6 +79,8 @@ RSpec.configure do |config|
   config.after :each do
     Warden.test_reset!
   end
+
+  config.include Capybara::DSL
 end
 
 Shoulda::Matchers.configure do |config|
