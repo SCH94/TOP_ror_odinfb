@@ -28,9 +28,9 @@ N/A
 
 ## Built With
 * [Ruby on Rails](http://rubyonrails.org/) - Web framework
-* [Devise](https://github.com/plataformatec/devise) - Authentication
-* [Rspec](http://rspec.info) - Test suite
-* [Bootstrap](http://getbootstrap.com/) - CSS framework
+* [Bootstrap](http://getbootstrap.com/) - HTML/CSS framework
+* [PostgreSQL](https://www.postgresql.org/) - Database
+* [Rspec](http://rspec.info)/[Capybara](http://teamcapybara.github.io/capybara/) - Test suite
 * [Heroku](https://www.heroku.com/home) - Cloud platform/server
 * [SendGrid](https://sendgrid.com/) - Email delivery service
 
