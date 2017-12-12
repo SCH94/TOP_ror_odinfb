@@ -33,3 +33,10 @@ end
     body: Faker::VentureBros.quote        
   )
 end
+
+50.times do |n|
+  user.friendships.create(
+    friend_id: n,
+    accepted: true        
+  )
+end
