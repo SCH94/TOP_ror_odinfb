@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:posts).find(params[:id])
+    @user = User.includes(posts: [:comments]).find(params[:id])
     session[:return_to] = request.fullpath
   end
 end
