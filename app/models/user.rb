@@ -36,12 +36,16 @@ class User < ApplicationRecord
     requested_friends | received_friends
   end
 
+  def accepted_friend_ids
+    accepted_friends.map(&:id)
+  end
+
   def accepted_friendships
     self.friendships.where(accepted: true, user_id: self.id).or(self.received_friendships.where(accepted: true, friend_id: self.id))
   end
 
   def feed
-    Post.where("user_id IN (?) OR user_id = ?", (requested_friend_ids + received_friend_ids), id).order(created_at: :desc)
+    Post.where(user_id: [accepted_friend_ids, id].flatten).order(created_at: :desc).includes(:comments, :user)
   end
 
   def liked?(post)
