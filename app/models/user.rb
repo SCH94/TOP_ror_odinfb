@@ -41,7 +41,7 @@ class User < ApplicationRecord
   end
 
   def accepted_friendships
-    self.friendships.where(accepted: true, user_id: self.id).or(self.received_friendships.where(accepted: true, friend_id: self.id))
+    friendships.where(accepted: true, user_id: id).or(received_friendships.where(accepted: true, friend_id: id))
   end
 
   def feed
@@ -49,7 +49,7 @@ class User < ApplicationRecord
   end
 
   def liked?(post)
-    self.likes.find_by_post_id(post)
+    likes.find_by_post_id(post)
   end
 
   def self.from_omniauth(auth)
