@@ -34,7 +34,7 @@ describe CommentsController, type: :controller do
       end
 
       xit "redirects successfully" do
-        expect(good_request).to have_http_status(302)
+        expect(good_request).to have_http_status(300)
       end
     end
 

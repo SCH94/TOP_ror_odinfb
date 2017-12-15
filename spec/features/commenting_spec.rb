@@ -112,7 +112,7 @@ describe "Comment management", type: :feature do
       end
   
       it "displays a comment's author" do
-        expect(page).to have_content(@comment.author_name)
+        expect(page).to have_content(@comment.user_name)
       end
   
       it "diplays a comment's timestamp" do
