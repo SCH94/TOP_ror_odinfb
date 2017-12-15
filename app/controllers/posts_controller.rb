@@ -2,8 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # @posts = current_user.feed.includes(:likes, comments: [:user])
-    @posts = current_user.feed.includes(:comments, :user)
+    @posts = current_user.feed.includes(:user, comments: [:user])
     session[:return_to] = request.fullpath
   end
   
