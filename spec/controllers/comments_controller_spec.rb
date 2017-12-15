@@ -6,17 +6,26 @@ describe CommentsController, type: :controller do
   let(:test_comment) { create(:comment, user: current_user, post: test_post) }
   
   let(:valid_comment_params) {
-    { comment: { body: test_comment.body },
+    { comment: 
+      { body: test_comment.body,
+        user_id: current_user.id, 
+        post_id: test_post.id
+      },
       post_id: test_post,
       user_id: current_user                
     }    
   }
   let(:invalid_comment_params) {
-    { comment: { body: "" },
+    { comment: 
+      { body: "",
+        user_id: current_user.id, 
+        post_id: test_post.id
+      },
       post_id: test_post,
       user_id: current_user                
     }    
   }
+
   let(:good_request) { post :create, params: valid_comment_params }
   let(:bad_request) { post :create, params: invalid_comment_params }
 
@@ -28,21 +37,23 @@ describe CommentsController, type: :controller do
   end
 
   describe "POST #create" do
+    before :each do
+      sign_in(current_user)
+    end
+
     context "with valid params" do
       it "creates a new comment" do
         expect{ good_request }.to change(Comment, :count).by(1)
       end
 
-      xit "redirects successfully" do
-        expect(good_request).to have_http_status(300)
+      it "redirects successfully" do
+        expect(good_request).to have_http_status(302)
       end
     end
 
     context "with invalid params" do
       it "does not create a new comment" do
-        expect{
-          post :create, params: invalid_comment_params
-        }.to_not change(Comment, :count)
+        expect{ bad_request }.to_not change(Comment, :count)
       end
     end
   end

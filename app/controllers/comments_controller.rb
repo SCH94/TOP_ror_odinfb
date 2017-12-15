@@ -7,10 +7,13 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @post.comments.build(comment_params)
+
     if @comment.save
       flash[:notice] = "Your comment was posted!"
       redirect_to session[:return_to]
     else
+      puts @comment.errors.messages
+
       flash.now[:danger] = "Can't submit a blank comment!"
       render :new
     end
