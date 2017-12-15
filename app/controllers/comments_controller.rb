@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @post.comments.build(comment_params)
     if @comment.save
+      flash[:notice] = "Your comment was posted!"
       redirect_to session[:return_to]
     else
       flash.now[:danger] = "Can't submit a blank comment!"
@@ -22,6 +23,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:body).merge(user_id: current_user.id)
+    params.require(:comment).permit(:body).merge(user: current_user)
   end
 end

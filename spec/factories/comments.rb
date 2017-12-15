@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :comment do
-    body "MyText"
+    user
+    post
+    body "My text"
   end
 end

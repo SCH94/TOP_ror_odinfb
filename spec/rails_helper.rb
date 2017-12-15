@@ -8,6 +8,8 @@ require 'rspec/rails'
 require 'support/factory_bot'
 require 'capybara/rspec'
 require 'selenium/webdriver'
+require 'devise'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

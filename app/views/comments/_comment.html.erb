@@ -1,6 +1,6 @@
 <li class='comment'>
   <span class='comment-author'><%= comment.body %></span><br>
-  <span class='comment-commenter'><%= User.find(comment.user_id).name %>
+  <span class='comment-commenter'><%= comment.user_name %>
     on <%= comment.date_print %>
   </span>
 </li>

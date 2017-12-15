@@ -23,13 +23,9 @@ gem 'will_paginate', '~> 3.1', '>= 3.1.6'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13'
-  gem 'capybara-selenium', '~> 0.0.6'
-  gem 'chromedriver-helper', '~> 1.1'
   gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
   gem 'faker', '~> 1.8'
   gem 'rspec-rails', '~> 3.6'
-  gem 'selenium-webdriver', '~> 3.5'
 end
 
 group :development, :production do
@@ -47,10 +43,14 @@ end
 
 group :test do
   gem 'capybara-email', '~> 2.5'
+  gem 'capybara', '~> 2.13'
+  gem 'capybara-selenium', '~> 0.0.6'
+  gem 'chromedriver-helper', '~> 1.1'
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
   gem 'email_spec', '~> 2.1'
   gem 'guard-rspec', '~> 4.7'
   gem 'launchy', '~> 2.4'
+  gem 'selenium-webdriver', '~> 3.5'
   gem 'shoulda-matchers', '~> 3.1'
 end
 
