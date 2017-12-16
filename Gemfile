@@ -26,6 +26,9 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
   gem 'faker', '~> 1.8'
   gem 'rspec-rails', '~> 3.6'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-commands-rspec', '~> 1.0', '>= 1.0.4'
 end
 
 group :development, :production do
@@ -35,8 +38,6 @@ end
 group :development do
   gem 'letter_opener', '~> 1.4', '>= 1.4.1'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
   gem 'bullet', '~> 5.7'
 end

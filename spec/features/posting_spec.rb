@@ -1,50 +1,65 @@
 require 'rails_helper'
 
 describe 'Post management', type: :feature do
+  let(:poster) { create(:confirmed_user) }
+  
   before :example do
-    @user = create(:confirmed_user)
-    login_as(@user)
+    login_as poster
   end
 
-  context 'from the feed' do
-    scenario 'creating a post' do
+  context "from the feed" do
+    before :each do
       visit authenticated_root_path
-      click_link 'Create a post'
-      expect{
-        fill_in 'Title', with: 'A new post'
-        fill_in 'Post', with: 'This is a brief, test post.'
-        click_button 'Submit'                        
-      }.to change(Post, :count).by 1
-      expect(current_path).to eq authenticated_root_path
-      expect(page).to have_content 'Post was successfully created'
+      click_on "Create a post"
+      fill_in 'Title', with: 'A new title'
+      fill_in 'Post', with: 'A new post.'
     end
 
-    scenario 'cancelling a post' do
-      visit authenticated_root_path
-      click_link 'Create a post'
-      click_link 'Cancel'
-      expect(current_path).to eq authenticated_root_path
+    describe "creating a post" do      
+      it "displays a confirmation" do
+        click_on "Submit"  
+        expect(page).to have_css(".alert-notice")
+      end
+
+      it "redirects a user back to the feed" do
+        click_on "Submit"  
+        expect(current_path).to eq authenticated_root_path
+      end
+    end
+
+    describe "cancelling a post" do
+      it "redirects a user back to the feed" do
+        click_on "Cancel"
+        expect(current_path).to eq authenticated_root_path
+      end
     end
   end
 
-  context 'from a profile' do
-    scenario 'creating a post' do
-      visit user_path(@user)
-      click_link 'Create a post'
-      expect{
-        fill_in 'Title', with: 'A new post'
-        fill_in 'Post', with: 'This is a brief, test post.'
-        click_button 'Submit'                        
-      }.to change(Post, :count).by 1
-      expect(current_path).to eq user_path(@user)
-      expect(page).to have_content 'Post was successfully created'
+  context "from a user's profile" do
+    before :each do
+      visit user_path poster
+      click_on "Create a post"
+      fill_in 'Title', with: 'A new title'
+      fill_in 'Post', with: 'A new post.'
     end
 
-    scenario 'cancelling a post' do
-      visit user_path(@user)
-      click_link 'Create a post'
-      click_link 'Cancel'
-      expect(current_path).to eq user_path(@user)
+    describe "creating a post" do
+      it "displays a confirmation" do
+        click_on "Submit"
+        expect(page).to have_css(".alert-notice")
+      end
+  
+      it "redirects a user back to their profile" do
+        click_on "Submit"
+        expect(current_path).to eq user_path poster
+      end
+    end
+
+    describe "cancelling a post" do
+      it "redirects a user back to their profile" do
+        click_on "Cancel"
+        expect(current_path).to eq user_path poster
+      end
     end
   end
 end

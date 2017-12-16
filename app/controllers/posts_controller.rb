@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
 
     if @post.save
-      flash[:success] = 'Post was successfully created.'
+      flash[:notice] = 'Post was successfully created.'
       redirect_to session[:return_to]
     else
       render :new
